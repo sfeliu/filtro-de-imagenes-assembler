@@ -32,7 +32,7 @@ float profundidad (int x, int y, int x0, int y0) {
 	return a * s_taylor;
 }
 
-void ondas_c (
+void ondas_c(
 	unsigned char *src,
 	unsigned char *dst,
 	int width,
@@ -40,12 +40,10 @@ void ondas_c (
 	int src_row_size,
 	int dst_row_size,
 	int x0,
-	int y0
-) {
+	int y0)
+{
 	unsigned char (*src_matrix)[src_row_size] = (unsigned char (*)[src_row_size]) src;
 	unsigned char (*dst_matrix)[dst_row_size] = (unsigned char (*)[dst_row_size]) dst;
 
 	// ~ completar
 }
-
-
