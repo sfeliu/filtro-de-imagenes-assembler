@@ -11,16 +11,17 @@ void monocromatizar_inf_c(
 	unsigned char (*src_matrix)[src_row_size] = (unsigned char (*)[src_row_size]) src;
 	unsigned char (*dst_matrix)[dst_row_size] = (unsigned char (*)[dst_row_size]) dst;
 
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			if(max(src_matrix[i][j][0], src_matrix[i][j][1]) ==	max(src_matrix[i][j][1], src_matrix[i][j][2]))
-			{
-				dst_matrix[i][j] = src_matrix[i][j][1];
-			}else{
-				dst_matrix[i][j] = max(src_matrix[i][j][0], src_matrix[i][j][2]);
-			}
-		}
-	}
+	// for (int i = 0; i < height; i++)
+	// {
+	// 	for (int j = 0; j < width; j=j+4)
+	// 	{
+	// 		bgra_t pixel = src_matrix[i][j];
+	// 		if(max(pixel->r, pixel->b) ==	max(pixel->r, pixel->g)
+	// 		{
+	// 			dst_matrix[i/4][j/4] = pixel->r;
+	// 		}else{
+	// 			dst_matrix[i/4][j/4] = max(pixel->g,pixel->b);
+	// 		}
+	// 	}
+	// }
 }
