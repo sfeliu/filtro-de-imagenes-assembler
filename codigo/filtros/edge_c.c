@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include "../tp2.h"
 
-void edge_c (unsigned char *src, unsigned char *dst, int width, int height, int src_row_size, int dst_row_size)
+void edge_c (
+	unsigned char *src,
+	unsigned char *dst,
+	int width,
+	int height,
+	int src_row_size,
+	int dst_row_size)
 {
 
 	// ~ completar
