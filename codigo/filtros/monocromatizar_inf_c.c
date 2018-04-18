@@ -1,3 +1,4 @@
+#include "monocromatizar_inf.c"
 #define max(a, b) ((a)>(b))?(a):(b)
 
 void monocromatizar_inf_c(
@@ -14,12 +15,12 @@ void monocromatizar_inf_c(
 	{
 		for (int j = 0; j < width; j = j + 4)
 		{
-			bgra_t = src_matrix[i][j];
-			if(max(src_matrix[i][j]->b, src_matrix[i][j]->g) ==	max(src_matrix[i][j]->g, src_matrix[i][j]->r))
+			bgra_t* pixel_src = src_matrix[i][j];
+			if(max(pixel_src->b, pixel_src->g) ==	max(pixel_src->g, pixel_src->r))
 			{
-				dst_matrix[i/4][j/4] = src_matrix[i/4][j/4]->g;
+				dst_matrix[i/4][j/4] = pixel_src->g;
 			}else{
-				dst_matrix[i/4][j/4] = max(src_matrix[i][j]->b, src_matrix[i][j]->r);
+				dst_matrix[i/4][j/4] = max(pixel_src->b, pixel_src->r);
 			}
 
 		}
