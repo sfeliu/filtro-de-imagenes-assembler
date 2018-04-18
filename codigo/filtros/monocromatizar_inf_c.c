@@ -12,16 +12,19 @@ void monocromatizar_inf_c(
 	unsigned char (*dst_matrix)[dst_row_size] = (unsigned char (*)[dst_row_size]) dst;
 	for (int i = 0; i < height; i++)
 	{
-		for (int j = 0; j < width; j = j+4)
+		for (int j = 0; j < width; j++)
 		{
 			// bgra_t* pixel_src = src_matrix[i][j];
-			// if(max(pixel_src->b, pixel_src->g) ==	max(pixel_src->g, pixel_src->r))
-			// {
-			// 	dst_matrix[i/4][j/4] = pixel_src->g;
-			// }else{
-			// 	dst_matrix[i/4][j/4] = max(pixel_src->b, pixel_src->r);
-			// }
-
+			if(max(src_matrix[i][j*4+0], src_matrix[i][j*4+1]) == max(src_matrix[i][j*4+1], src_matrix[i][j*4+2]))
+			{
+				dst_matrix[i][j*4+0] = src_matrix[i][j*4+1];
+				dst_matrix[i][j*4+1] = src_matrix[i][j*4+1];
+				dst_matrix[i][j*4+2] = src_matrix[i][j*4+1];
+			}else{
+				dst_matrix[i][j*4+0] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
+				dst_matrix[i][j*4+1] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
+				dst_matrix[i][j*4+2] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
+			}
 		}
 	}
 }
