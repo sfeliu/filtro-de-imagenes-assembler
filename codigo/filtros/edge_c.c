@@ -16,17 +16,21 @@ void edge_c(
 	{
 		for (int j = 0; j < width; j++)
 		{
-			dst_matrix[i][j*4+0] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
-									src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
-									(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
+			dst_matrix[i][j] = (src_matrix[i-1][j-1]*0.5) + src_matrix[i-1][j] + (src_matrix[i-1][j+1]*0.5) +
+									src_matrix[i][j-1] + (src_matrix[i][j]*-6) + src_matrix[i][j+1] +
+									(src_matrix[i+1][j-1]*0.5) + src_matrix[i+1][j] + (src_matrix[i+1][j+1]*0.5);
 
-			dst_matrix[i][j*4+1] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
-									src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
-									(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
-
-			dst_matrix[i][j*4+2] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
-									src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
-									(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
+			// dst_matrix[i][j*4+0] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
+			// 						src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
+			// 						(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
+			//
+			// dst_matrix[i][j*4+1] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
+			// 						src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
+			// 						(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
+			//
+			// dst_matrix[i][j*4+2] = (src_matrix[i-1][(j-1)*4+0]*0.5) + src_matrix[i-1][j*4+0] + (src_matrix[i-1][(j+1)*4+0]*0.5) +
+			// 						src_matrix[i][(j-1)*4+0] + (src_matrix[i][j*4+0]*-6) + src_matrix[i][(j+1)*4+0] +
+			// 						(src_matrix[i+1][(j-1)*4+0]*0.5) + src_matrix[i+1][j*4+0] + (src_matrix[i+1][(j+1)*4+0]*0.5);
 		}
 	}
 }

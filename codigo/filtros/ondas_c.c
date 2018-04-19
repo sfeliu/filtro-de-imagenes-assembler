@@ -60,7 +60,7 @@ void ondas_c(
 	{
 		for (int j = 0; j < width; j++)
 		{
-			float prof = profundidad(i, j, x0, y0);
+			float prof = profundidad(height/2 - i, width/2 - j, x0, y0);
 
 			dst_matrix[i][j*4+0] = saturar(prof*64 + src_matrix[i][j*4+0]);
 			dst_matrix[i][j*4+1] = saturar(prof*64 + src_matrix[i][j*4+1]);
