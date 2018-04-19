@@ -15,16 +15,9 @@ void monocromatizar_inf_c(
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if(max(src_matrix[i][j*4+0], src_matrix[i][j*4+1]) == max(src_matrix[i][j*4+1], src_matrix[i][j*4+2]))
-			{
-				dst_matrix[i][j*4+0] = src_matrix[i][j*4+1];
-				dst_matrix[i][j*4+1] = src_matrix[i][j*4+1];
-				dst_matrix[i][j*4+2] = src_matrix[i][j*4+1];
-			}else{
-				dst_matrix[i][j*4+0] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
-				dst_matrix[i][j*4+1] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
-				dst_matrix[i][j*4+2] = max(src_matrix[i][j*4+0], src_matrix[i][j*4+2]);
-			}
+			dst_matrix[i][j*4+0] = max(src_matrix[i][j*4+0], max(src_matrix[i][j*4+1], src_matrix[i][j*4+2]));
+			dst_matrix[i][j*4+1] = max(src_matrix[i][j*4+0], max(src_matrix[i][j*4+1], src_matrix[i][j*4+2]));
+			dst_matrix[i][j*4+2] = max(src_matrix[i][j*4+0], max(src_matrix[i][j*4+1], src_matrix[i][j*4+2]));
 		}
 	}
 }
