@@ -1,5 +1,4 @@
 #include <math.h>
-
 #include "../tp2.h"
 
 #define PI 			3.1415
@@ -7,7 +6,8 @@
 #define WAVELENGTH 	64
 #define TRAINWIDTH 	3.4
 
-float sin_taylor (float x) {
+float sin_taylor(float x)
+{
 	float x_3 = x*x*x;
 	float x_5 = x*x*x*x*x;
 	float x_7 = x*x*x*x*x*x*x;
@@ -15,7 +15,8 @@ float sin_taylor (float x) {
 	return x-(x_3/6.0)+(x_5/120.0)-(x_7/5040.0);
 }
 
-float profundidad (int x, int y, int x0, int y0) {
+float profundidad(int x, int y, int x0, int y0)
+{
 	float dx = x - x0;
 	float dy = y - y0;
 
@@ -32,6 +33,16 @@ float profundidad (int x, int y, int x0, int y0) {
 	return a * s_taylor;
 }
 
+int saturar(float value)
+{
+	if(value < 0){
+		value = 0;
+	}else if(value > 255){
+		value = 255;
+	}
+	return (int)value;
+}
+
 void ondas_c(
 	unsigned char *src,
 	unsigned char *dst,
@@ -45,5 +56,15 @@ void ondas_c(
 	unsigned char (*src_matrix)[src_row_size] = (unsigned char (*)[src_row_size]) src;
 	unsigned char (*dst_matrix)[dst_row_size] = (unsigned char (*)[dst_row_size]) dst;
 
-	// ~ completar
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			float prof = profundidad(i, j, x0, y0);
+
+			dst_matrix[i][j*4+0] = saturar(prof*64 + src_matrix[i][j*4+0]);
+			dst_matrix[i][j*4+1] = saturar(prof*64 + src_matrix[i][j*4+1]);
+			dst_matrix[i][j*4+2] = saturar(prof*64 + src_matrix[i][j*4+2]);
+		}
+	}
 }

@@ -1,4 +1,3 @@
-
 #include <math.h>
 #include "../tp2.h"
 
@@ -8,7 +7,7 @@ bool between(unsigned int val, unsigned int a, unsigned int b)
 	return a <= val && val <= b;
 }
 
-void temperature_c    (
+void temperature_c(
 	unsigned char *src,
 	unsigned char *dst,
 	int width,
