@@ -105,9 +105,6 @@ void correr_filtro_imagen(configuracion_t *config, aplicador_fn_t aplicador)
 	imprimir_tiempos_ejecucion(start, end, config->cant_iteraciones);
 
 	//Para experimentacion
-	FILE * pFile;
-	pFile = fopen ("../exp/Tiempos_FILTRO_.txt","w");
 	unsigned long long int cant_ciclos = end-start;
-	fprintf(pfile, "%llu\n", cant_ciclos);
-	fclose (pFile);
+	fprintf(stderr, "%llu\n", cant_ciclos);
 }
