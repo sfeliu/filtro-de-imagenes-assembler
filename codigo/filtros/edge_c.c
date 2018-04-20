@@ -22,9 +22,10 @@ void edge_c(
 			}
 			else
 			{
-				dst_matrix[i][j] = (unsigned int)(	(src_matrix[i-1][j-1]*0.5)	+ src_matrix[i-1][j] 	+ (src_matrix[i-1][j+1]*0.5) 	+
-													src_matrix[i][j-1] 			+ (src_matrix[i][j]*-6) + src_matrix[i][j+1] 			+
-													(src_matrix[i+1][j-1]*0.5) 	+ src_matrix[i+1][j] 	+ (src_matrix[i+1][j+1]*0.5)	);
+				dst_matrix[i][j] = (int)(	(float)(src_matrix[i-1][j-1])*0.5	+ (float)(src_matrix[i-1][j]) 		+ (float)(src_matrix[i-1][j+1])*0.5 	+
+											(float)(src_matrix[i][j-1])			+ (float)(src_matrix[i][j])*(-6) 	+ (float)(src_matrix[i][j+1]) 			+
+											(float)(src_matrix[i+1][j-1])*0.5 	+ (float)(src_matrix[i+1][j]) 		+ (float)(src_matrix[i+1][j+1])*0.5		);
+				if(dst_matrix[i][j] > 255 || dst_matrix[i][j] < 0) printf("i: %i, j: %i -> p :%i\n", i, j, dst_matrix[i][j]);
 			}
 		}
 	}
