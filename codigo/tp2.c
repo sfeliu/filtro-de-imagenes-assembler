@@ -106,5 +106,5 @@ void correr_filtro_imagen(configuracion_t *config, aplicador_fn_t aplicador)
 
 	//Para experimentacion
 	unsigned long long int cant_ciclos = end-start;
-	fprintf(stderr, "%llu\n", cant_ciclos);
+	fprintf(stderr, "%llu", cant_ciclos);
 }
