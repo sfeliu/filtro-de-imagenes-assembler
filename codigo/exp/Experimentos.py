@@ -66,6 +66,7 @@ TCX = pd.read_csv('txt_result/TimeTempC_X.txt', delim_whitespace = False)
 TCY = pd.read_csv('txt_result/TimeTempC_Y.txt', delim_whitespace = False)
 TCXYc = pd.read_csv('txt_result/TimeTempC_XYconst.txt', delim_whitespace = False)
 
+imegen = [x for x in range(1, 51)]
 
 ################################################################################
 #EXPERIMENTOS###################################################################

@@ -101,3 +101,6 @@ for i in range(1, 51):
 		time = time + int(errors)
 	f.write(str(time/5) + '\n')
 f.close()
+
+#BORRO TODAS LAS IMAGES QUE SE GENERARARON
+p = sub.Popen(['make'])
