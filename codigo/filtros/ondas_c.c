@@ -33,14 +33,11 @@ float profundidad(int x, int y, int x0, int y0)
 	return a * s_taylor;
 }
 
-int saturar(float value)
+unsigned int saturarO(float value)
 {
-	if(value < 0){
-		value = 0;
-	}else if(value > 255){
-		value = 255;
-	}
-	return (int)value;
+	if(value < 0) value = 0;
+	if(value > 255) value = 255;
+	return (unsigned int)value;
 }
 
 void ondas_c(
@@ -62,9 +59,9 @@ void ondas_c(
 		{
 			float prof = profundidad(j, i, x0, y0);
 
-			dst_matrix[i][j*4+0] = saturar(prof*64 + src_matrix[i][j*4+0]);
-			dst_matrix[i][j*4+1] = saturar(prof*64 + src_matrix[i][j*4+1]);
-			dst_matrix[i][j*4+2] = saturar(prof*64 + src_matrix[i][j*4+2]);
+			dst_matrix[i][j*4+0] = saturarO(prof*64 + src_matrix[i][j*4+0]);
+			dst_matrix[i][j*4+1] = saturarO(prof*64 + src_matrix[i][j*4+1]);
+			dst_matrix[i][j*4+2] = saturarO(prof*64 + src_matrix[i][j*4+2]);
 		}
 	}
 }
