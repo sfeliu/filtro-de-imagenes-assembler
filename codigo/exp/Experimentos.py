@@ -3,11 +3,72 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
+################################################################################
+#IMPORTO TODOS LOS ARCHIVOS.####################################################
+
+#BLIT ASM
+BAXY = pd.read_csv('txt_result/TimeBlitASM_XY.txt', delim_whitespace = False)
+BAX = pd.read_csv('txt_result/TimeBlitASM_X.txt', delim_whitespace = False)
+BAY = pd.read_csv('txt_result/TimeBlitASM_Y.txt', delim_whitespace = False)
+BAXYc = pd.read_csv('txt_result/TimeBlitASM_XYconst.txt', delim_whitespace = False)
+
+#BLIT C
+BCXY = pd.read_csv('txt_result/TimeBlitC_XY.txt', delim_whitespace = False)
+BCX = pd.read_csv('txt_result/TimeBlitC_X.txt', delim_whitespace = False)
+BCY = pd.read_csv('txt_result/TimeBlitC_Y.txt', delim_whitespace = False)
+BCXYc = pd.read_csv('txt_result/TimeBlitC_XYconst.txt', delim_whitespace = False)
+
+#EDGE ASM
+EAXY = pd.read_csv('txt_result/TimeEdgeASM_XY.txt', delim_whitespace = False)
+EAX = pd.read_csv('txt_result/TimeEdgeASM_X.txt', delim_whitespace = False)
+EAY = pd.read_csv('txt_result/TimeEdgeASM_Y.txt', delim_whitespace = False)
+EAXYc = pd.read_csv('txt_result/TimeEdgeASM_XYconst.txt', delim_whitespace = False)
+
+#EDGE C
+ECXY = pd.read_csv('txt_result/TimeEdgeC_XY.txt', delim_whitespace = False)
+ECX = pd.read_csv('txt_result/TimeEdgeC_X.txt', delim_whitespace = False)
+ECY = pd.read_csv('txt_result/TimeEdgeC_Y.txt', delim_whitespace = False)
+ECXYc = pd.read_csv('txt_result/TimeEdgeC_XYconst.txt', delim_whitespace = False)
+
+#MONOCROMATIZAR ASM
+MAXY = pd.read_csv('txt_result/TimeMonoASM_XY.txt', delim_whitespace = False)
+MAX = pd.read_csv('txt_result/TimeMonoASM_X.txt', delim_whitespace = False)
+MAY = pd.read_csv('txt_result/TimeMonoASM_Y.txt', delim_whitespace = False)
+MAXYc = pd.read_csv('txt_result/TimeMonoASM_XYconst.txt', delim_whitespace = False)
+
+#MONOCROMATIZAR C
+MCXY = pd.read_csv('txt_result/TimeMonoC_XY.txt', delim_whitespace = False)
+MCX = pd.read_csv('txt_result/TimeMonoC_X.txt', delim_whitespace = False)
+MCY = pd.read_csv('txt_result/TimeMonoC_Y.txt', delim_whitespace = False)
+MCXYc = pd.read_csv('txt_result/TimeMonoC_XYconst.txt', delim_whitespace = False)
+
+#ONDAS ASM
+OAXY = pd.read_csv('txt_result/TimeoOndasASM_XY.txt', delim_whitespace = False)
+OAX = pd.read_csv('txt_result/TimeOndasASM_X.txt', delim_whitespace = False)
+OAY = pd.read_csv('txt_result/TimeOndasASM_Y.txt', delim_whitespace = False)
+OAXYc = pd.read_csv('txt_result/TimeOndasASM_XYconst.txt', delim_whitespace = False)
+
+#ONDAS C
+OCXY = pd.read_csv('txt_result/TimeOndasC_XY.txt', delim_whitespace = False)
+OCX = pd.read_csv('txt_result/TimeOndasC_X.txt', delim_whitespace = False)
+OCY = pd.read_csv('txt_result/TimeOndasC_Y.txt', delim_whitespace = False)
+OCXYc = pd.read_csv('txt_result/TimeOndasC_XYconst.txt', delim_whitespace = False)
+
+#TEMPERATURE ASM
+TAXY = pd.read_csv('txt_result/TimeTempASM_XY.txt', delim_whitespace = False)
+TAX = pd.read_csv('txt_result/TimeTempASM_X.txt', delim_whitespace = False)
+TAY = pd.read_csv('txt_result/TimeTempASM_Y.txt', delim_whitespace = False)
+TAXYc = pd.read_csv('txt_result/TimeTempASM_XYconst.txt', delim_whitespace = False)
+
+#TEMPERATURE C
+TCXY = pd.read_csv('txt_result/TimeTempC_XY.txt', delim_whitespace = False)
+TCX = pd.read_csv('txt_result/TimeTempC_X.txt', delim_whitespace = False)
+TCY = pd.read_csv('txt_result/TimeTempC_Y.txt', delim_whitespace = False)
+TCXYc = pd.read_csv('txt_result/TimeTempC_XYconst.txt', delim_whitespace = False)
+
 
 ################################################################################
-CIFB = pd.read_csv('CIFB.txt', delim_whitespace = True)
-CIBT = pd.read_csv('CIBT.txt', delim_whitespace = True)
-CIDN = pd.read_csv('CIDN.txt', delim_whitespace = True)
+#EXPERIMENTOS###################################################################
 
 CIpesos = CIFB.ix[:,0]
 CIvalores = CIFB.ix[:,1]
@@ -30,9 +91,6 @@ plt.savefig("plot/Exp1.png")
 
 
 ################################################################################
-EFFB = pd.read_csv('EFFB.txt', delim_whitespace = True)
-EFBT = pd.read_csv('EFBT.txt', delim_whitespace = True)
-EFDN = pd.read_csv('EFDN.txt', delim_whitespace = True)
 
 EFpesos = EFFB.ix[:,0]
 EFvalores = EFFB.ix[:,1]
@@ -55,9 +113,6 @@ plt.savefig("plot/Exp2.png")
 
 
 ################################################################################
-MFFB = pd.read_csv('MFFB.txt', delim_whitespace = True)
-MFBT = pd.read_csv('MFBT.txt', delim_whitespace = True)
-MFDN = pd.read_csv('MFDN.txt', delim_whitespace = True)
 
 MFpesos = MFFB.ix[:,0]
 MFvalores = MFFB.ix[:,1]
