@@ -18,7 +18,7 @@ typedef void (blit_fn_t) (unsigned char*, unsigned char*, int, int, int, int,
 
 void leer_params_blit(configuracion_t *config, int argc, char *argv[])
 {
-	config->archivo_entrada_2 = "../img/blitsmall.bmp"; //argv[argc - 2];
+	config->archivo_entrada_2 = "img/blitsmall.bmp"; //argv[argc - 2];
 }
 
 void aplicar_blit(configuracion_t *config)

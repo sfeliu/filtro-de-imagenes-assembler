@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "../tp2.h"
 
+// unsigned int saturarE(float value)
+// {
+// 	if(value < 0) value = 0;
+// 	if(value > 255) value = 255;
+// 	return (unsigned int)value;
+// }
+
 void edge_c(
 	unsigned char *src,
 	unsigned char *dst,
@@ -18,15 +25,18 @@ void edge_c(
 		{
 			if(j == 0 || i == 0 || j == width-1 || i == height-1)
 			{
-				dst_matrix[i][j] = 0;
+				dst_matrix[i][j] = src_matrix[i][j];
 			}
 			else
 			{
-				float res =	(src_matrix[i-1][j-1]/2	+ 	src_matrix[i-1][j] 		+	src_matrix[i-1][j+1]/2 	+
+				float res =	src_matrix[i-1][j-1]/2	+ 	src_matrix[i-1][j] 		+	src_matrix[i-1][j+1]/2 	+
 							src_matrix[i][j-1]		+	src_matrix[i][j]*(-6)	+	src_matrix[i][j+1]		+
-							src_matrix[i+1][j-1]/2 	+	src_matrix[i+1][j] 		+	src_matrix[i+1][j+1]/2	);
+							src_matrix[i+1][j-1]/2 	+	src_matrix[i+1][j] 		+	src_matrix[i+1][j+1]/2	;
 
-				if(res < 0) res = res * -1;
+				// saturarE(res);
+
+				if(res < 0) res = 0;
+				if(res > 255) res = 255;
 
 				dst_matrix[i][j] = (unsigned int)res;
 			}
