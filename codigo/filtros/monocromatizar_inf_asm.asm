@@ -20,7 +20,7 @@ extern monocromatizar_inf_c
 global monocromatizar_inf_asm
 
 section .rodata
-	mascara_ultimo_byte_de_DW: DB 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff
+	mascara_ultimo_byte_de_DW: DB 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0
 	mover_una_posicion_DW: DB 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8
 	negativos times 16 DB 0xff
 
@@ -37,54 +37,55 @@ monocromatizar_inf_asm:
 	shr rcx, 2									;rcx = height*width / 4 (cantidad de loops)
 
 	movdqu xmm0, [mascara_ultimo_byte_de_DW]
-	pxor xmm2, xmm2
-	pxor xmm3, xmm3
-	pxor xmm4, xmm4
-	pxor xmm5, xmm5
 	movdqu xmm6, [mover_una_posicion_DW]
 	movdqu xmm7, [negativos]
 	
 	.ciclo:
-		movdqu xmm1, [rdi]						; xmm1 = |R|G|B|A|R|G|B|A|R|G|B|A|R|G|B|A| = |PIXEL|PIXEL|PIXEL|PIXEL|
-		pblendvb xmm2, xmm1						; xmm2 = |   A   |   A   |   A   |   A   |
+		pxor xmm2, xmm2
+		pxor xmm3, xmm3
+		pxor xmm4, xmm4
+		pxor xmm5, xmm5
+		movdqu xmm1, [rdi]						; xmm1 = |A|R|G|B|A|R|G|B|A|R|G|B|A|R|G|B| = |PIXEL|PIXEL|PIXEL|PIXEL|
+		pblendvb xmm2, xmm1						; xmm2 = |   B   |   B   |   B   |   B   |
 		
-		pslld xmm1, 8					        ; xmm1 = |-|R|G|B|-|R|G|B|-|R|G|B|-|R|G|B|
-		pblendvb xmm3, xmm1						; xmm3 = |   B   |   B   |   B   |   B   |
+		psrld xmm1, 8					        ; xmm1 = |-|A|R|G|-|A|R|G|-|A|R|G|-|A|R|G|
+		pblendvb xmm3, xmm1						; xmm3 = |   G   |   G   |   G   |   G   |
 
-		pslld xmm1, 8					        ; xmm1 = |-|-|R|G|-|-|R|G|-|-|R|G|-|-|R|G|
-		pblendvb xmm4, xmm1						; xmm4 = |   G   |   G   |   G   |   G   |
+		psrld xmm1, 8					        ; xmm1 = |-|-|A|R|-|-|A|R|-|-|A|R|-|-|A|R|
+		pblendvb xmm4, xmm1						; xmm4 = |   R   |   R   |   R   |   R   |
 
-		pslld xmm1, 8					        ; xmm1 = |   R   |   R   |   R   |   R   |
+		psrld xmm1, 8					        ; xmm1 = |   A   |   A   |   A   |   A   |
 	
 		movdqu xmm5, xmm3						; xmm5 = xmm3
-		psrld xmm5, 8 
-		psrld xmm4, 8
-		pcmpgtd xmm5, xmm4						; xmm5 = |max(B,G)|max(B,G)|max(B,G)|max(B,G)| "Mascara"
-		pand xmm3, xmm5							; xmm3 = |   B    |   0    |    0   |    B   |
+		;pslld xmm5, 8 
+		;pslld xmm4, 8
+		pcmpgtd xmm5, xmm4						; xmm5 = |max(R,G)|max(R,G)|max(R,G)|max(R,G)| "Mascara"
+		pand xmm3, xmm5							; xmm3 = |   R    |   0    |    0   |    R   |
 		pxor xmm5, xmm7
 		pand xmm4, xmm5							; xmm4 = |   0    |   G    |    G   |    0   |
-		por xmm3, xmm4							; xmm3 = |   B    |   G    |    G   |    B   |
+		por xmm3, xmm4							; xmm3 = |   R    |   G    |    G   |    R   |
 
 		movdqu xmm5, xmm3						; xmm5 = xmm3
-		psrld xmm5, 8
-		psrld xmm1, 8
-		pcmpgtd xmm5, xmm1						; xmm5 = |max(B,G,R)|max(B,G,R)|max(B,G,R)|max(B,G,R)| "Mascara"
-		pand xmm3, xmm5							; xmm3 = |     0    |     0    |     G    |     B    |
+		;pslld xmm5, 8
+		;pslld xmm2, 8
+		pcmpgtd xmm5, xmm2						; xmm5 = |max(B,G,R)|max(B,G,R)|max(B,G,R)|max(B,G,R)| "Mascara"
+		pand xmm3, xmm5							; xmm3 = |     0    |     0    |     G    |     R    |
 		pxor xmm5, xmm7
-		pand xmm1, xmm5							; xmm1 = |     R    |     R    |     0    |     0    |
-		por xmm3, xmm1							; xmm3 = |     R    |     R    |     G    |     B    |
+		pand xmm2, xmm5							; xmm2 = |     B    |     B    |     0    |     0    |
+		por xmm3, xmm2							; xmm3 = |     B    |     B    |     G    |     R    |
 
-												; xmm3 = |0|0|0|R|0|0|0|R|0|0|0|G|0|0|0|B| "Máximos de cada pixel"
+												; xmm3 = |0|0|0|B|0|0|0|B|0|0|0|G|0|0|0|R| "Máximos de cada pixel"
 	
-		psrld xmm3, 8							; xmm3 = |0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|
-		movdqu xmm1, xmm3
-		psrld xmm3, 8							; xmm3 = |0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|0|
-		por xmm1, xmm3							; xmm1 = |0|R|R|0|0|R|R|0|0|G|G|0|0|B|B|0|
-		psrld xmm3, 8							; xmm3 = |R|0|0|0|R|0|0|0|G|0|0|0|B|0|0|0|
-		por xmm1, xmm3							; xmm1 = |R|R|R|0|R|R|R|0|G|G|G|0|B|B|B|0|
-		por xmm1, xmm2							; xmm1 = |R|R|R|A|R|R|R|A|G|G|G|A|B|B|B|A|
+		;pslld xmm3, 8							; xmm3 = |0|0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|
+		movdqu xmm2, xmm3
+		pslld xmm3, 8							; xmm3 = |0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|
+		por xmm2, xmm3							; xmm2 = |0|0|R|R|0|0|R|R|0|0|G|G|0|0|B|B|
+		pslld xmm3, 8							; xmm3 = |0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|0|
+		por xmm2, xmm3							; xmm2 = |0|R|R|R|0|R|R|R|0|G|G|G|0|B|B|B|
+		pslld xmm1, 24							; xmm1 = |A|0|0|0|A|0|0|0|A|0|0|0|A|0|0|0|
+		por xmm2, xmm1							; xmm2 = |A|R|R|R|A|R|R|R|A|G|G|G|A|B|B|B|
 
-		movdqu [rsi], xmm1
+		movdqu [rsi], xmm2
 
 		add rdi, 16
 		add rsi, 16
