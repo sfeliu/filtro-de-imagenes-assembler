@@ -2,7 +2,9 @@ all :
 	rm -fr *.bmp
 
 img:
-	GenerarImg.py
+	g++ -std=c++11 -D_GLIBCXX_DEBUG -g -Wall GenerarImg.cpp -o GenerarImg.out
+	./GenerarImg.out
+	python GenerarTamano.py
 
 run :
 	python Blit_tiempos.py
