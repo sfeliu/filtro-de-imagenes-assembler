@@ -1,6 +1,9 @@
 all :
 	rm -fr *.bmp
 
+img:
+	GenerarImg.py
+
 run :
 	python Blit_tiempos.py
 	python Edge_tiempos.py
