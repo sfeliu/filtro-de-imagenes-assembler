@@ -39,7 +39,7 @@ monocromatizar_inf_asm:
 	movdqu xmm0, [mascara_ultimo_byte_de_DW]
 	movdqu xmm6, [mover_una_posicion_DW]
 	movdqu xmm7, [negativos]
-	
+
 	.ciclo:
 		pxor xmm2, xmm2
 		pxor xmm3, xmm3
@@ -47,7 +47,7 @@ monocromatizar_inf_asm:
 		pxor xmm5, xmm5
 		movdqu xmm1, [rdi]						; xmm1 = |A|R|G|B|A|R|G|B|A|R|G|B|A|R|G|B| = |PIXEL|PIXEL|PIXEL|PIXEL|
 		pblendvb xmm2, xmm1						; xmm2 = |   B   |   B   |   B   |   B   |
-		
+
 		psrld xmm1, 8					        ; xmm1 = |-|A|R|G|-|A|R|G|-|A|R|G|-|A|R|G|
 		pblendvb xmm3, xmm1						; xmm3 = |   G   |   G   |   G   |   G   |
 
@@ -55,10 +55,8 @@ monocromatizar_inf_asm:
 		pblendvb xmm4, xmm1						; xmm4 = |   R   |   R   |   R   |   R   |
 
 		psrld xmm1, 8					        ; xmm1 = |   A   |   A   |   A   |   A   |
-	
+
 		movdqu xmm5, xmm3						; xmm5 = xmm3
-		;pslld xmm5, 8 
-		;pslld xmm4, 8
 		pcmpgtd xmm5, xmm4						; xmm5 = |max(R,G)|max(R,G)|max(R,G)|max(R,G)| "Mascara"
 		pand xmm3, xmm5							; xmm3 = |   R    |   0    |    0   |    R   |
 		pxor xmm5, xmm7
@@ -66,8 +64,6 @@ monocromatizar_inf_asm:
 		por xmm3, xmm4							; xmm3 = |   R    |   G    |    G   |    R   |
 
 		movdqu xmm5, xmm3						; xmm5 = xmm3
-		;pslld xmm5, 8
-		;pslld xmm2, 8
 		pcmpgtd xmm5, xmm2						; xmm5 = |max(B,G,R)|max(B,G,R)|max(B,G,R)|max(B,G,R)| "Mascara"
 		pand xmm3, xmm5							; xmm3 = |     0    |     0    |     G    |     R    |
 		pxor xmm5, xmm7
@@ -75,8 +71,7 @@ monocromatizar_inf_asm:
 		por xmm3, xmm2							; xmm3 = |     B    |     B    |     G    |     R    |
 
 												; xmm3 = |0|0|0|B|0|0|0|B|0|0|0|G|0|0|0|R| "Máximos de cada pixel"
-	
-		;pslld xmm3, 8							; xmm3 = |0|0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|
+
 		movdqu xmm2, xmm3
 		pslld xmm3, 8							; xmm3 = |0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|
 		por xmm2, xmm3							; xmm2 = |0|0|R|R|0|0|R|R|0|0|G|G|0|0|B|B|
@@ -94,11 +89,5 @@ monocromatizar_inf_asm:
 		jg .ciclo
 
 	pop rbp
-
-	;sub rsp, 8
-
-	;call monocromatizar_inf_c
-
-	;add rsp, 8
 
 	ret
