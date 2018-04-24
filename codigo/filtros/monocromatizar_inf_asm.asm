@@ -15,8 +15,6 @@
 ; 	r8 = src_row_size
 ; 	r9 = dst_row_size
 
-extern monocromatizar_inf_c
-
 global monocromatizar_inf_asm
 
 section .rodata
