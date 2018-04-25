@@ -71,7 +71,7 @@ temperature_asm:
 		paddd xmm2, xmm3						; xmm2 = |  B+G  |  B+G  |  B+G  |  B+G  |
 		paddd xmm2, xmm4						; xmm2 = | B+G+R | B+G+R | B+G+R | B+G+R |
 		cvtdq2ps xmm2, xmm2
-		divps xmm2, xmm15						; xmm2 = |   T   |   T   |   T   |   T   |
+		divps xmm2, xmm13						; xmm2 = |   T   |   T   |   T   |   T   |
 		cvtps2dq xmm2, xmm2						; xmm2 = | | | |T| | | |T| | | |T| | | |T|	; Esto pasa porque T < 255
 
 
@@ -159,13 +159,13 @@ temperature_asm:
 		psubd xmm3, xmm2						; xmm3 = |  T-160  |  T-160  |  T-160  |  T-160  |
 		pslld xmm3, 2							; xmm3 = |(T-160)*4|(T-160)*4|(T-160)*4|(T-160)*4| [0|0|0|(T-160)*4](PIXEL)
 
-		movdqu xmm2, xmm12						; xmm2 = xmm12
+		movdqu xmm2, xmm12						; xmm2 = 255
 		pslld xmm2, 8							; [0|0|255|0](PIXEL)
 		por xmm2, xmm12							; [0|0|255|255](PIXEL)
 		psubd xmm2, xmm3						; [0|0|255|255-(T-160)*4](PIXEL)
 		pslld xmm2, 8							; [0|255|255-(T-160)*4|0](PIXEL)
 
-		pand xmm9, xmm2							;
+		pand xmm9, xmm2							; Resultado caso 4
 
 
 		movdqu xmm2, xmm15						; xmm2 = 32
@@ -179,16 +179,16 @@ temperature_asm:
 		psubd xmm2, xmm3						; [0|0|0|255-(T-224)*4](PIXEL)
 		pslld xmm2, 16							; [0|255-(T-224)*4|0|0](PIXEL)
 
-		pand xmm4, xmm2							;
+		pand xmm4, xmm2							; Resultado caso 5
 
 
-		por xmm4, xmm6
-		por xmm4, xmm7
-		por xmm4, xmm8
-		por xmm4, xmm9
+		por xmm4, xmm6							; junto resultados
+		por xmm4, xmm7							; junto resultados
+		por xmm4, xmm8							; junto resultados
+		por xmm4, xmm9							; junto resultados
 
-		pslld xmm1, 24
-		por xmm1, xmm4
+		pslld xmm1, 24							; agrego alfa a la solucion
+		por xmm1, xmm4							; agrego alfa a la solucion
 
 		movdqu [rsi], xmm1
 
