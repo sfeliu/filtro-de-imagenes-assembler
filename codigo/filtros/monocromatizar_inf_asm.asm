@@ -1,4 +1,4 @@
-; void monocromatizar_inf_asm (
+; void monocromatizar_inf_asm(
 ; 	unsigned char *src,
 ; 	unsigned char *dst,
 ; 	int width,
@@ -18,15 +18,16 @@
 global monocromatizar_inf_asm
 
 section .rodata
+
 	mascara_ultimo_byte_de_DW: DB 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0, 0xff, 0, 0, 0
 	mover_una_posicion_DW: DB 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8
-	negativos times 16 DB 0xff
+	negativos: times 16 DB 0xff
 
 section .text
 
 monocromatizar_inf_asm:
 
-	push rbp									; Stack frame								'ALINEADO'
+	push rbp									; Stack frame				'ALINEADO'
 	mov rbp, rsp
 
 	mov rax, rdx
@@ -66,9 +67,7 @@ monocromatizar_inf_asm:
 		pand xmm3, xmm5							; xmm3 = |     0    |     0    |     G    |     R    |
 		pxor xmm5, xmm7
 		pand xmm2, xmm5							; xmm2 = |     B    |     B    |     0    |     0    |
-		por xmm3, xmm2							; xmm3 = |     B    |     B    |     G    |     R    |
-
-												; xmm3 = |0|0|0|B|0|0|0|B|0|0|0|G|0|0|0|R| "Máximos de cada pixel"
+		por xmm3, xmm2							; xmm3 = |     B    |     B    |     G    |     R    | [0|0|0|B](PIXEL)
 
 		movdqu xmm2, xmm3
 		pslld xmm3, 8							; xmm3 = |0|0|R|0|0|0|R|0|0|0|G|0|0|0|B|0|
