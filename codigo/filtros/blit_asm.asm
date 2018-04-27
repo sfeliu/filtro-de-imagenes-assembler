@@ -90,6 +90,8 @@ blit_asm:
 			sub rsi, r11;					; "     "          "		"	"
 			movdqu xmm1, [rdi];
 			movdqu [rsi], xmm1;
+			add rdi, 16;
+			add rsi, 16;
 		fin:			
 			dec rcx;
 			cmp rcx, 0;

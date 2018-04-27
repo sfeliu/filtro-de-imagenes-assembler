@@ -20,22 +20,40 @@ void blit_c(
 	{
 		for (int j = 0; j < w; j++)
 		{
-			dst_matrix[i][j*4+0] = src_matrix[i][j*4+0];
-			dst_matrix[i][j*4+1] = src_matrix[i][j*4+1];
-			dst_matrix[i][j*4+2] = src_matrix[i][j*4+2];
-		}
-	}
-
-	for (int i = 0; i < bh; i++)
-	{
-		for (int j = 0; j < bw; j++)
-		{
-			if(!(b_matrix[i][j*4+0] == 255 && b_matrix[i][j*4+1] == 0 && b_matrix[i][j*4+2] == 255))
+			if(i < bh && j < bw)
 			{
-				dst_matrix[h - bh + i][(w -bw +j)*4+0] = b_matrix[i][j*4+0];
-				dst_matrix[h - bh + i][(w -bw +j)*4+1] = b_matrix[i][j*4+1];
-				dst_matrix[h - bh + i][(w -bw +j)*4+2] = b_matrix[i][j*4+2];
+				if(!(b_matrix[i][j*4+0] == 255 && b_matrix[i][j*4+1] == 0 && b_matrix[i][j*4+2] == 255))
+				{
+					dst_matrix[h - bh + i][(w -bw +j)*4+0] = b_matrix[i][j*4+0];
+					dst_matrix[h - bh + i][(w -bw +j)*4+1] = b_matrix[i][j*4+1];
+					dst_matrix[h - bh + i][(w -bw +j)*4+2] = b_matrix[i][j*4+2];
+				}
+				else
+				{
+					dst_matrix[i][j*4+0] = src_matrix[i][j*4+0];
+					dst_matrix[i][j*4+1] = src_matrix[i][j*4+1];
+					dst_matrix[i][j*4+2] = src_matrix[i][j*4+2];
+				}
+			}
+			else
+			{
+				dst_matrix[i][j*4+0] = src_matrix[i][j*4+0];
+				dst_matrix[i][j*4+1] = src_matrix[i][j*4+1];
+				dst_matrix[i][j*4+2] = src_matrix[i][j*4+2];
 			}
 		}
 	}
+
+	// for (int i = 0; i < bh; i++)
+	// {
+	// 	for (int j = 0; j < bw; j++)
+	// 	{
+	// 		if(!(b_matrix[i][j*4+0] == 255 && b_matrix[i][j*4+1] == 0 && b_matrix[i][j*4+2] == 255))
+	// 		{
+	// 			dst_matrix[h - bh + i][(w -bw +j)*4+0] = b_matrix[i][j*4+0];
+	// 			dst_matrix[h - bh + i][(w -bw +j)*4+1] = b_matrix[i][j*4+1];
+	// 			dst_matrix[h - bh + i][(w -bw +j)*4+2] = b_matrix[i][j*4+2];
+	// 		}
+	// 	}
+	// }
 }

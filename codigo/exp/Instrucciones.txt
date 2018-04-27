@@ -1,0 +1,6 @@
+Para correr la experimentacion primero se deben descomentar las ultimas 2 lineas
+del archivo "tp2.c", luego compilar normalmente.
+Siguiente a esto se debe entrar a la carpeta "exp", que es en la que se encuentra
+el codigo de la experimentacion y correr el comando "make run". Esto generara las
+imagenes para probar y la experimentacion propuesta por el grupo.
+Por ultimo si se desea se pueden borrar los datos obtenidos corriendo "make clean".

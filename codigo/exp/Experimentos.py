@@ -66,72 +66,236 @@ TCX = pd.read_csv('txt_result/TimeTempC_X.txt', delim_whitespace = False)
 TCY = pd.read_csv('txt_result/TimeTempC_Y.txt', delim_whitespace = False)
 TCXYc = pd.read_csv('txt_result/TimeTempC_XYconst.txt', delim_whitespace = False)
 
-imegen = [x for x in range(1, 51)]
-
 ################################################################################
 #EXPERIMENTOS###################################################################
 
-CIpesos = CIFB.ix[:,0]
-CIvalores = CIFB.ix[:,1]
 
-CIFuerzaBruta = CIFB.ix[:,2]
-CIBacktracking = CIBT.ix[:,2]
-CIDinamica = CIDN.ix[:,2]
+#BLIT###########################################################################
+
+ABlitXY = BAXY.ix[:,0]
+ABlitX = BAX.ix[:,0]
+ABlitY = BAY.ix[:,0]
+ABlitXYc = BAXYc.ix[:,0]
+
+CBlitXY = BCXY.ix[:,0]
+CBlitX = BCX.ix[:,0]
+CBlitY = BCY.ix[:,0]
+CBlitXYc = BCXYc.ix[:,0]
 
 plt.figure()
-datosFB = np.log(CIFuerzaBruta)
-datosBT = np.log(CIBacktracking)
-datosDN = np.log(CIDinamica)
-plt.plot(datosFB, "c", label="Algoritmo Fuerza Bruta")
-plt.plot(datosBT, "m", label="Algoritmo Backtracking")
-plt.plot(datosDN, "k", label="Algoritmo Dinamico")
-plt.xlabel("Elementos o tamaño de la mochila")
-plt.ylabel("Tiempo en nansegundos (en escala logaritmica)")
+plt.plot(ABlitXY, "c", label="Blit implementado en ASM")
+plt.plot(CBlitXY, "m", label="Blit implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
 plt.legend()
-plt.savefig("plot/Exp1.png")
+plt.savefig("plot/Exp_BlitXY.png")
 
+plt.figure()
+plt.plot(ABlitX, "c", label="Blit implementado en ASM")
+plt.plot(CBlitX, "m", label="Blit implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_BlitX.png")
+
+plt.figure()
+plt.plot(ABlitY, "c", label="Blit implementado en ASM")
+plt.plot(CBlitY, "m", label="Blit implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_BlitY.png")
+
+plt.figure()
+plt.plot(ABlitXYc, "c", label="Blit implementado en ASM")
+plt.plot(CBlitXYc, "m", label="Blit implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_BlitXYc.png")
 
 ################################################################################
 
-EFpesos = EFFB.ix[:,0]
-EFvalores = EFFB.ix[:,1]
+#Edge###########################################################################
 
-EFFuerzaBruta = EFFB.ix[:,2]
-EFBacktracking = EFBT.ix[:,2]
-EFDinamica = EFDN.ix[:,2]
+AEdgeXY = EAXY.ix[:,0]
+AEdgeX = EAX.ix[:,0]
+AEdgeY = EAY.ix[:,0]
+AEdgeXYc = EAXYc.ix[:,0]
+
+CEdgeXY = ECXY.ix[:,0]
+CEdgeX = ECX.ix[:,0]
+CEdgeY = ECY.ix[:,0]
+CEdgeXYc = ECXYc.ix[:,0]
 
 plt.figure()
-datosFB = np.log(EFFuerzaBruta)
-datosBT = np.log(EFBacktracking)
-datosDN = np.log(EFDinamica)
-plt.plot(datosFB, "c", label="Algoritmo Fuerza Bruta")
-plt.plot(datosBT, "m", label="Algoritmo Backtracking")
-plt.plot(datosDN, "k", label="Algoritmo Dinamico")
-plt.xlabel("Tamaño de la mochila")
-plt.ylabel("Tiempo en nansegundos (en escala logaritmica)")
+plt.plot(AEdgeXY, "c", label="Edge implementado en ASM")
+plt.plot(CEdgeXY, "m", label="Edge implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
 plt.legend()
-plt.savefig("plot/Exp2.png")
+plt.savefig("plot/Exp_EdgeXY.png")
 
+plt.figure()
+plt.plot(AEdgeX, "c", label="Edge implementado en ASM")
+plt.plot(CEdgeX, "m", label="Edge implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_EdgeX.png")
+
+plt.figure()
+plt.plot(AEdgeY, "c", label="Edge implementado en ASM")
+plt.plot(CEdgeY, "m", label="Edge implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_EdgeY.png")
+
+plt.figure()
+plt.plot(AEdgeXYc, "c", label="Edge implementado en ASM")
+plt.plot(CEdgeXYc, "m", label="Edge implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_EdgeXYc.png")
 
 ################################################################################
 
-MFpesos = MFFB.ix[:,0]
-MFvalores = MFFB.ix[:,1]
+#Monocromatizar#################################################################
 
-MFFuerzaBruta = MFFB.ix[:,2]
-MFBacktracking = MFBT.ix[:,2]
-MFDinamica = MFDN.ix[:,2]
+AMonoXY = MAXY.ix[:,0]
+AMonoX = MAX.ix[:,0]
+AMonoY = MAY.ix[:,0]
+AMonoXYc = MAXYc.ix[:,0]
+
+CMonoXY = MCXY.ix[:,0]
+CMonoX = MCX.ix[:,0]
+CMonoY = MCY.ix[:,0]
+CMonoXYc = MCXYc.ix[:,0]
 
 plt.figure()
-datosFB = np.log(MFFuerzaBruta)
-datosBT = np.log(MFBacktracking)
-datosDN = np.log(MFDinamica)
-plt.plot(datosFB, "c", label="Algoritmo Fuerza Bruta")
-plt.plot(datosBT, "m", label="Algoritmo Backtracking")
-plt.plot(datosDN, "k", label="Algoritmo Dinamico")
-plt.xlabel("Elementos")
-plt.ylabel("Tiempo en nansegundos (en escala logaritmica)")
+plt.plot(AMonoXY, "c", label="Monocromatizar implementado en ASM")
+plt.plot(CMonoXY, "m", label="Monocromatizar implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
 plt.legend()
-plt.savefig("plot/Exp3.png")
+plt.savefig("plot/Exp_MonoXY.png")
+
+plt.figure()
+plt.plot(AMonoX, "c", label="Monocromatizar implementado en ASM")
+plt.plot(CMonoX, "m", label="Monocromatizar implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_MonoX.png")
+
+plt.figure()
+plt.plot(AMonoY, "c", label="Monocromatizar implementado en ASM")
+plt.plot(CMonoY, "m", label="Monocromatizar implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_MonoY.png")
+
+plt.figure()
+plt.plot(AMonoXYc, "c", label="Monocromatizar implementado en ASM")
+plt.plot(CMonoXYc, "m", label="Monocromatizar implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_MonoXYc.png")
+
+################################################################################
+
+#Ondas##########################################################################
+
+AOndasXY = OAXY.ix[:,0]
+AOndasX = OAX.ix[:,0]
+AOndasY = OAY.ix[:,0]
+AOndasXYc = OAXYc.ix[:,0]
+
+COndasXY = OCXY.ix[:,0]
+COndasX = OCX.ix[:,0]
+COndasY = OCY.ix[:,0]
+COndasXYc = OCXYc.ix[:,0]
+
+plt.figure()
+plt.plot(AOndasXY, "c", label="Ondas implementado en ASM")
+plt.plot(COndasXY, "m", label="Ondas implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_OndasXY.png")
+
+plt.figure()
+plt.plot(AOndasX, "c", label="Ondas implementado en ASM")
+plt.plot(COndasX, "m", label="Ondas implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_OndasX.png")
+
+plt.figure()
+plt.plot(AOndasY, "c", label="Ondas implementado en ASM")
+plt.plot(COndasY, "m", label="Ondas implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_OndasY.png")
+
+plt.figure()
+plt.plot(AOndasXYc, "c", label="Ondas implementado en ASM")
+plt.plot(COndasXYc, "m", label="Ondas implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_OndasXYc.png")
+
+################################################################################
+
+#Temperature####################################################################
+
+ATempXY = TAXY.ix[:,0]
+ATempX = TAX.ix[:,0]
+ATempY = TAY.ix[:,0]
+ATempXYc = TAXYc.ix[:,0]
+
+CTempXY = TCXY.ix[:,0]
+CTempX = TCX.ix[:,0]
+CTempY = TCY.ix[:,0]
+CTempXYc = TCXYc.ix[:,0]
+
+plt.figure()
+plt.plot(ATempXY, "c", label="Temperature implementado en ASM")
+plt.plot(CTempXY, "m", label="Temperature implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_TempXY.png")
+
+plt.figure()
+plt.plot(ATempX, "c", label="Temperature implementado en ASM")
+plt.plot(CTempX, "m", label="Temperature implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_TempX.png")
+
+plt.figure()
+plt.plot(ATempY, "c", label="Temperature implementado en ASM")
+plt.plot(CTempY, "m", label="Temperature implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_TempY.png")
+
+plt.figure()
+plt.plot(ATempXYc, "c", label="Temperature implementado en ASM")
+plt.plot(CTempXYc, "m", label="Temperature implementado en C")
+plt.xlabel("Tamaño de la imagen")
+plt.ylabel("Ciclos de clock")
+plt.legend()
+plt.savefig("plot/Exp_TempXYc.png")
 
 ################################################################################

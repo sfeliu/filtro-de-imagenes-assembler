@@ -1,17 +1,19 @@
 all :
 	rm -fr *.bmp
 
-img:
-	g++ -std=c++11 -D_GLIBCXX_DEBUG -g -Wall GenerarImg.cpp -o GenerarImg.out
-	./GenerarImg.out
-	python GenerarTamano.py
-
 run :
-	python Blit_tiempos.py
-	python Edge_tiempos.py
-	python Mono_tiempos.py
-	python Ondas_tiempos.py
-	python Temp_tiempos.py
+	python3	GenerarTamanos.py
+	python3 Blit_tiempos.py
+	python3 Edge_tiempos.py
+	python3 Mono_tiempos.py
+	python3 Ondas_tiempos.py
+	python3 Temp_tiempos.py
+	python3 Experimentos.py
 
 clean :
 	rm -fr txt_result/*.txt
+	rm -fr plot_result/*.png
+	rm -fr img/VarX/*.bmp
+	rm -fr img/VarXY/*.bmp
+	rm -fr img/VarY/*.bmp
+	rm -fr img/VarXY_const/*.bmp
