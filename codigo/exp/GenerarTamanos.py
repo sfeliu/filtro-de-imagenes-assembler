@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-IMAGENES=["lena.bmp", "random.bmp"]
+IMAGENES=["lena.bmp", "colores32.bmp"]
 
 ################################################################################
 #GENERAR IMAGENES XY
