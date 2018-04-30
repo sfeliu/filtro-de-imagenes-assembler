@@ -31,6 +31,7 @@ cte6: times 4 DD 6.0
 cte120: times 4 DD 120.0				;se puede multiplicar una mascara por un inmediato?? me sive porque 6*20=120
 cte5040: times 4 DD 5040.0				;5040 = 6*840
 mask: DB 0x00, 0x00, 0x00, 0x80, 0x01, 0x01, 0x01, 0x80, 0x02, 0x02, 0x02, 0x80, 0x03, 0x03, 0x03, 0x80
+maskalpha: DD 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000
 
 global ondas_asm
 
@@ -46,6 +47,7 @@ ondas_asm:
 	mov r12, [rbp +16]
 	mov r13, [rbp +24]
 	pxor xmm0, xmm0;
+	movdqu xmm10, [maskalpha]
 
 	.ciclo:
 		movdqu xmm0, [rdi]				;xmm0 = [{r1,g1,b1,a1} = P_{x,y} , {r2,g2,b2,a2} = P_{x+1,y} , ...]
@@ -141,22 +143,73 @@ ondas_asm:
 		divps xmm2, xmm3				;xmm2 = [((t1)^7)/5040 | ((t2)^7)/5040 |((t3)^7)/5040 |((t4)^7)/5040]
 		subps xmm4, xmm2				;xmm5 = [t1 - ((t1)^3)/6 + ((t1)^5)/120 - ((t1)^7)/5040  | ... ]
 
-		mulps xmm4, xmm5				;xmm6 = [prof1|prof2|prof3|prof4]
+		mulps xmm4, xmm5				;xmm4 = [prof1|prof2|prof3|prof4]
 		movups xmm2, [wavelength]		;xmm2 = [64|64|64|64]
-		mulps xmm4, xmm2				;xmm6 = [(prof1)*64|(prof2)*64| ...]
+		mulps xmm4, xmm2				;xmm4 = [(prof1)*64|(prof2)*64| ...]
 
 		roundps xmm4, xmm4 ,1
-		cvtps2dq xmm4, xmm4			;cual es la diferencia entre cvttps2qs y roundps ???????????????????????????
+		cvtps2dq xmm4, xmm4
 
-		packusdw xmm4, xmm4				;xmm6 = [prof1|prof2|prof3|prof4|prof1|prof2|prof3|prof4]
-		packuswb xmm4, xmm4				;xmm6 = [prof1|prof2|prof3|prof4|prof1|prof2|prof3|prof4| ...]
+		;desempaqueto xmm0 de byte a word en xmm0 y xmm2
+		pxor xmm1, xmm1
+		pcmpgtd xmm1, xmm0;
+		movdqu xmm2, xmm0;
 
-		movdqu xmm3, [mask]
-		pshufb xmm4, xmm3				;xmm6 = [prof1|prof1|prof1|0|prof2|prof2|prof2|0|porf3 ...]
+		punpckhbw xmm0, xmm1
+		punpcklbw xmm2, xmm1
 
-		paddusb xmm4, xmm0				;xmm6 = [saturate((prof1)*64 + src[x][y]) | saturate((prof2)*64 + src[x+1][y]) | ...]
+		;desempaqueto xmm0 de word a double-word en xmm0 y xmm2
+		pxor xmm1, xmm1
+		pcmpgtw xmm1, xmm0
+		movdqu xmm6, xmm0;
 
-		movdqu [rsi], xmm4				;dest[0..15] = xmm4
+		punpckhwd xmm0, xmm1			;xmm0 = [pixel1]
+		punpcklwd xmm6, xmm1			;xmm6 = [pixel2]
+
+		;desempaqueto xmm2 de word a double-word en xmm2 y xmm7 
+		pxor xmm1, xmm1
+		pcmpgtw xmm1, xmm2
+		movdqu xmm7, xmm2
+
+		punpckhwd xmm2, xmm1			;xmm2 = [pixel3]
+		punpcklwd xmm7, xmm1			;xmm7 = [pixel4]
+
+		;sumo prof1 con pixel1
+		pshufd xmm3, xmm4, 0xFF;
+		pand xmm3, xmm10
+		paddd xmm0, xmm3;
+
+		;sumo prof2 con pixel2
+		pshufd xmm3, xmm4, 0xAA;
+		pand xmm3, xmm10;
+		paddd xmm6, xmm3;
+
+		;empaquto en xmm0 de bye a word xmm0 y xmm6
+		packusdw xmm6, xmm0
+
+		;sumo prof3 con pixel3
+		pshufd xmm3, xmm4, 0x55;
+		pand xmm3, xmm10;				
+		paddd xmm2, xmm3
+
+		;sumo prof4 con pixel4
+		pshufd xmm3, xmm4, 0x00;
+		pand xmm3, xmm10;
+		paddd xmm7, xmm3
+
+		;empaquto en xmm2 de bye a word xmm2 y xmm7
+		packusdw xmm7, xmm2;
+		
+		packuswb xmm7, xmm6;
+		movdqu [rsi], xmm7				;dest[0..15] = xmm4
+
+
+		;packusdw xmm4, xmm4	
+		;packuswb xmm4, xmm4;
+		;movdqu xmm3, [mask]
+		;pshufb xmm4, xmm3				;xmm6 = [prof1|prof1|prof1|0|prof2|prof2|prof2|0|porf3 ...]
+		;paddusb xmm0, xmm4				;xmm6 = [saturate((prof1)*64 + src[x][y]) | saturate((prof2)*64 + src[x+1][y]) | ...]
+		;movdqu [rsi], xmm0				;dest[0..15] = xmm4
 
 		add rsi, 16
 		add rdi, 16
