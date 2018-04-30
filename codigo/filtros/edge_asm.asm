@@ -30,11 +30,11 @@ section .text
 			pxor xmm2, xmm15						
 			paddsw xmm2, xmm13						; xmm2 = -Pxy
 			psllw xmm2, 1							; xmm2 = (-2)*Pxy
-			pslldq xmm4, 2							; xmm4 = Px(y+1)
+			pslldq xmm2, 2							; xmm4 = Px(y+1)
 			paddsw xmm2, xmm4						; xmm2 = (-2)*Pxy + Px(y+1)
-			psrldq xmm4, 4							; xmm4 = Px(y-1)
+			psrldq xmm2, 4							; xmm4 = Px(y-1)
 			paddsw xmm2, xmm4						; xmm2 = (-2)*Pxy + Px(y+1) + Px(y-1)
-			pslldq xmm4, 2							; xmm4 = Pxy
+			pslldq xmm2, 2							; xmm4 = Pxy
 			pxor xmm4, xmm15
 			paddsw xmm4, xmm13						; xmm4 = -Pxy
 			psllw xmm4, 1							; xmm4 = (-2)*Pxy
@@ -43,21 +43,24 @@ section .text
 													; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1)
 			paddsw xmm2, xmm1 						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y
 			psraw xmm1, 1							; xmm1 = (0.5)*P(x+1)y
-			pslldq xmm1, 2							; xmm1 = (0.5)*P(x+1)(y+1)
+			pslldq xmm2, 2							; xmm1 = (0.5)*P(x+1)(y+1)
 			paddsw xmm2, xmm1 						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y + (0.5)*P(x+1)(y+1)
-			psrldq xmm1, 4							; xmm1 = (0.5)*P(x+1)(y-1)
+			psrldq xmm2, 4							; xmm1 = (0.5)*P(x+1)(y-1)
 			paddsw xmm2, xmm1 						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y + (0.5)*P(x+1)(y+1)
 			 										;		 + (0.5)*P(x+1)(y-1)	
+			pslldq xmm2, 2							; Posicion original
+			
 			paddsw xmm2, xmm3						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y + (0.5)*P(x+1)(y+1)
 													;		 + (0.5)*P(x+1)(y-1) + P(x-1)y
 			psraw xmm3, 1							; xmm3 = (0.5)*P(x-1)y
-			pslldq xmm3, 2							; xmm3 = (0.5)*P(x-1)(y+1)
+			pslldq xmm2, 2							; xmm3 = (0.5)*P(x-1)(y+1)
 			paddsw xmm2, xmm3 						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y + (0.5)*P(x+1)(y+1)
 													;		 + (0.5)*P(x+1)(y-1) + P(x-1)y + (0.5)*P(x-1)(y+1)
-			psrldq xmm3, 4							; xmm3 = (0.5)*P(x-1)(y-1)
+			psrldq xmm2, 4							; xmm3 = (0.5)*P(x-1)(y-1)
 			paddsw xmm2, xmm3 						; xmm2 = (-6)*Pxy + Px(y+1) + Px(y-1) + P(x+1)y + (0.5)*P(x+1)(y+1)
 													;		 + (0.5)*P(x+1)(y-1) + P(x-1)y + (0.5)*P(x-1)(y+1) + (0.5)*P(x-1)(y-1) 
 													;		"sumatoria"
+			pslldq xmm2, 2							; Posición
 			ret
 
 edge_asm:
@@ -85,6 +88,7 @@ edge_asm:
 	dec rcx
 	dec rcx												; rcx = Alto -2	resto 2 porque no quiero hacer ni la primer ni la última fila
 	add rdi, r13										; Me salteo la primer fila
+	add rsi, r13
 
 	.ciclo_fila:
 		.ciclo_columna:
@@ -109,6 +113,7 @@ edge_asm:
 			movdqu xmm1, [rdi + r13]				; xmm1 = | Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar| Ar|
 			movdqu xmm2, [rdi]						; xmm2 = |P15|P14|P13|P12|P11|P10| P9| P8| P7| P6| P5| P4| P3| P2| P1| P0|
 			movdqu xmm3, [rdi + r11]				; xmm3 = | Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab| Ab|
+			movdqu xmm10, [rsi]
 
 
 			cmp rdx, r13
@@ -158,6 +163,10 @@ edge_asm:
 			punpckhbw xmm2, xmm0					; xmm2 = | P14 | P13 | P12 | P11 | P10 | P9 | P8 | P7 | "ó"
 													; xmm2 = | P12 | P11 | P10 | P9  | P8  | P7 | P6 | P5 |
 			punpckhbw xmm3, xmm0					; Partes altas del pixel de abajo
+
+			pslldq xmm1, 1
+			pslldq xmm2, 1
+			pslldq xmm3, 1
 
 			call sumatoria
 
@@ -221,11 +230,10 @@ edge_asm:
 													; Caso normal del medio
 			mov r10, 12								; Cómo estoy en el caso del medio, voy a querer avanzar de a 12					
 
-			psrldq xmm14, 2 						; xmm14= | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 			pslldq xmm14, 4 						; xmm14= | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
-			pslldq xmm14, 2 						; xmm14= | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 |
+			psrldq xmm14, 2 						; xmm14= | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 |
 			pxor xmm14, xmm15						; xmm14= | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
-			pand xmm14, xmm6						; xmm14= |orig x2| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |orig x2|
+			pand xmm14, xmm10						; xmm14= |orig x2| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |orig x2|
 			por xmm8, xmm14							; xmm8 = |orig x2| 				  modificados x12			     |orig x2|
 				
 			jmp .poner_en_memoria
@@ -237,7 +245,7 @@ edge_asm:
 			psrldq xmm14, 5 						; xmm14= | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 			pslldq xmm14, 2 						; xmm14= | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 |
 			pxor xmm14, xmm15						; xmm14= | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
-			pand xmm14, xmm6						; xmm14= |  orig x3  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |orig x2|
+			pand xmm14, xmm10						; xmm14= |  orig x3  | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |orig x2|
 			por xmm8, xmm14							; xmm8 = |  orig x3  | 	 	 	   modificados x11			     |orig x2|
 													; Voy a querer mantener lo de la otra fila pero tambien el borde, por eso x3
 			jmp .poner_en_memoria
@@ -266,7 +274,7 @@ edge_asm:
 			jg .ciclo_columna
 		mov rdx, r13
 		dec rcx
-		cmp rcx, 10
+		cmp rcx, 20
 		jg .ciclo_fila
 
 	pop r8
