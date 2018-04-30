@@ -240,7 +240,7 @@ edge_asm:
 
 		.caso_final_columna:
 			mov r10, 14								; Cómo estoy en el último caso, voy a querer empezar desde el principio de la 											  próxima fila
-			mov r8, 4
+			mov r8, 12
 
 			psrldq xmm14, 5 						; xmm14= | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 			pslldq xmm14, 2 						; xmm14= | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 |
@@ -274,7 +274,7 @@ edge_asm:
 			jg .ciclo_columna
 		mov rdx, r13
 		dec rcx
-		cmp rcx, 20
+		cmp rcx, 0
 		jg .ciclo_fila
 
 	pop r8
