@@ -119,7 +119,6 @@ edge_asm:
 			cmp rdx, r13
 			jne .caso_no_primero
 
-			movdqu xmm10, xmm2						; Me guardo los originales, así no pierdo el P14 y  P15
 			pslldq xmm1, 2							; Cómo estoy al principio de la columna debo shiftear para acomodar los pixeles
 			pslldq xmm2, 2							; xmm2 = |P13|P12|P11|P10| P9| P8| P7| P6| P5| P4| P3| P2| P1| P0| 0 | 0 |
 			pslldq xmm3, 2
@@ -154,19 +153,15 @@ edge_asm:
 			movdqu xmm2, xmm6
 			movdqu xmm3, xmm7
 
-			pslldq xmm1, 1
-			pslldq xmm2, 1							; xmm2 = |P14|P13|P12|P11|P10| P9| P8| P7| P6| P5| P4| P3| P2| P1| P0| 0 | "ó"
+			psrldq xmm1, 1
+			psrldq xmm2, 1							; xmm2 = |P14|P13|P12|P11|P10| P9| P8| P7| P6| P5| P4| P3| P2| P1| P0| 0 | "ó"
 													; xmm2 = |P12|P11|P10| P9| P8| P7| P6| P5| P4| P3| P2| P1| P0| 0 | 0 | 0 |
-			pslldq xmm3, 1
+			psrldq xmm3, 1
 
 			punpckhbw xmm1, xmm0					; Partes altas del pixel de arriba	
 			punpckhbw xmm2, xmm0					; xmm2 = | P14 | P13 | P12 | P11 | P10 | P9 | P8 | P7 | "ó"
 													; xmm2 = | P12 | P11 | P10 | P9  | P8  | P7 | P6 | P5 |
 			punpckhbw xmm3, xmm0					; Partes altas del pixel de abajo
-
-			pslldq xmm1, 1
-			pslldq xmm2, 1
-			pslldq xmm3, 1
 
 			call sumatoria
 
