@@ -167,9 +167,9 @@ edge_asm:
 
 													; xmm2 y xmm8 tengo words para convertir a bytes.
 
-			psrldq xmm2, 1							; xmm2 = |  0  | P14 | P13 | P12 | P11 | P10 | P9 | P8 | "ó"
+			psrldq xmm2, 2							; xmm2 = |  0  | P14 | P13 | P12 | P11 | P10 | P9 | P8 | "ó"
 													; xmm2 = |  0  | P12 | P11 | P10 | P9  | P8  | P7 | P6 |
-			pslldq xmm8, 1							; xmm8 = |  P7 | P6  | P5  | P4  | P3  | P2  | P1 |  0 | "ó"
+			pslldq xmm8, 2							; xmm8 = |  P7 | P6  | P5  | P4  | P3  | P2  | P1 |  0 | "ó"
 													; xmm8 = |  P5 | P4  | P3  | P2  | P1  | P0  |  0 |  0 |
 
 			packuswb xmm8, xmm2						; xmm8 = | 0 |P14|P13|P12|P11|P10|P9 |P8 |P7 |P6 |P5 |P4 |P3 |P2 |P1 | 0 | "ó"
