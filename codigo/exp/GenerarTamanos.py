@@ -16,12 +16,12 @@ i = 1
 for filename in IMAGENES:
 	print(filename)
 
-	for size in sizes:
+	for size in sizesXY:
 		sys.stdout.write("  " + size)
 		name = filename.split('.')
 		file_in  = "./img" + "/" + filename
 		file_out = "./img/VarXY/" + str(i) + "." + name[1]
-		resize = "convert -resize " + sizeXY + "! " + file_in + " " + file_out
+		resize = "convert -resize " + size + "! " + file_in + " " + file_out
 		subprocess.call(resize, shell=True)
 		i = i+1
 
@@ -40,12 +40,12 @@ i = 1
 for filename in IMAGENES:
 	print(filename)
 
-	for size in sizes:
+	for size in sizesX:
 		sys.stdout.write("  " + size)
 		name = filename.split('.')
 		file_in  = "./img" + "/" + filename
 		file_out = "./img/VarX/" + str(i) + "." + name[1]
-		resize = "convert -resize " + sizeXY + "! " + file_in + " " + file_out
+		resize = "convert -resize " + size + "! " + file_in + " " + file_out
 		subprocess.call(resize, shell=True)
 		i = i+1
 
@@ -64,12 +64,12 @@ i = 1
 for filename in IMAGENES:
 	print(filename)
 
-	for size in sizes:
+	for size in sizesY:
 		sys.stdout.write("  " + size)
 		name = filename.split('.')
 		file_in  = "./img" + "/" + filename
 		file_out = "./img/VarY/" + str(i) + "." + name[1]
-		resize = "convert -resize " + sizeXY + "! " + file_in + " " + file_out
+		resize = "convert -resize " + size + "! " + file_in + " " + file_out
 		subprocess.call(resize, shell=True)
 		i = i+1
 
@@ -88,12 +88,12 @@ i = 1
 for filename in IMAGENES:
 	print(filename)
 
-	for size in sizes:
+	for size in sizesXYconst:
 		sys.stdout.write("  " + size)
 		name = filename.split('.')
 		file_in  = "./img" + "/" + filename
 		file_out = "./img/VarXY_const/" + str(i) + "." + name[1]
-		resize = "convert -resize " + sizeXY + "! " + file_in + " " + file_out
+		resize = "convert -resize " + size + "! " + file_in + " " + file_out
 		subprocess.call(resize, shell=True)
 		i = i+1
 
