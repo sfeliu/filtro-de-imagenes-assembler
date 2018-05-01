@@ -152,23 +152,23 @@ ondas_asm:
 
 		;desempaqueto xmm0 de byte a word en xmm0 y xmm2
 		pxor xmm1, xmm1
-		pcmpgtd xmm1, xmm0;
+		;pcmpgtd xmm1, xmm0;
 		movdqu xmm2, xmm0;
 
 		punpckhbw xmm0, xmm1
 		punpcklbw xmm2, xmm1
 
 		;desempaqueto xmm0 de word a double-word en xmm0 y xmm2
-		pxor xmm1, xmm1
-		pcmpgtw xmm1, xmm0
+		;pxor xmm1, xmm1
+		;pcmpgtw xmm1, xmm0
 		movdqu xmm6, xmm0;
 
 		punpckhwd xmm0, xmm1			;xmm0 = [pixel1]
 		punpcklwd xmm6, xmm1			;xmm6 = [pixel2]
 
 		;desempaqueto xmm2 de word a double-word en xmm2 y xmm7 
-		pxor xmm1, xmm1
-		pcmpgtw xmm1, xmm2
+		;pxor xmm1, xmm1
+		;pcmpgtw xmm1, xmm2
 		movdqu xmm7, xmm2
 
 		punpckhwd xmm2, xmm1			;xmm2 = [pixel3]
