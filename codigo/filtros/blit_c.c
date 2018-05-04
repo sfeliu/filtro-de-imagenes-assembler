@@ -20,13 +20,13 @@ void blit_c(
 	{
 		for (int j = 0; j < w; j++)
 		{
-			if(i < bh && j < bw)
+			if(i >= h - bh && j >= w - bw)
 			{
-				if(!(b_matrix[i][j*4+0] == 255 && b_matrix[i][j*4+1] == 0 && b_matrix[i][j*4+2] == 255))
+				if(!(b_matrix[i-h+bh][(j-w+bw)*4+0] == 255 && b_matrix[i-h+bh][(j-w+bw)*4+1] == 0 && b_matrix[i-h+bh][(j-w+bw)*4+2] == 255))
 				{
-					dst_matrix[h - bh + i][(w -bw +j)*4+0] = b_matrix[i][j*4+0];
-					dst_matrix[h - bh + i][(w -bw +j)*4+1] = b_matrix[i][j*4+1];
-					dst_matrix[h - bh + i][(w -bw +j)*4+2] = b_matrix[i][j*4+2];
+					dst_matrix[i][j*4+0] = b_matrix[i-h+bh][(j-w+bw)*4+0];
+					dst_matrix[i][j*4+1] = b_matrix[i-h+bh][(j-w+bw)*4+1];
+					dst_matrix[i][j*4+2] = b_matrix[i-h+bh][(j-w+bw)*4+2];
 				}
 				else
 				{
@@ -43,17 +43,4 @@ void blit_c(
 			}
 		}
 	}
-
-	// for (int i = 0; i < bh; i++)
-	// {
-	// 	for (int j = 0; j < bw; j++)
-	// 	{
-	// 		if(!(b_matrix[i][j*4+0] == 255 && b_matrix[i][j*4+1] == 0 && b_matrix[i][j*4+2] == 255))
-	// 		{
-	// 			dst_matrix[h - bh + i][(w -bw +j)*4+0] = b_matrix[i][j*4+0];
-	// 			dst_matrix[h - bh + i][(w -bw +j)*4+1] = b_matrix[i][j*4+1];
-	// 			dst_matrix[h - bh + i][(w -bw +j)*4+2] = b_matrix[i][j*4+2];
-	// 		}
-	// 	}
-	// }
 }
