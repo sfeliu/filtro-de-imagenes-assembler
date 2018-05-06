@@ -9,6 +9,7 @@ run :
 	python3 Ondas_tiempos.py
 	python3 Temp_tiempos.py
 	python3 Experimentos.py
+	mv *.png plot_result/
 
 clean :
 	rm -fr txt_result/*.txt

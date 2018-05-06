@@ -1,6 +1,5 @@
 Para correr la experimentacion primero se deben descomentar las ultimas 2 lineas
-del archivo "tp2.c" y el lugar de donde toma la imagen para blit en blit.c luego
-compilar normalmente.
+del archivo "tp2.c" y luego compilar normalmente.
 Siguiente a esto se debe entrar a la carpeta "exp", que es en la que se encuentra
 el codigo de la experimentacion y correr el comando "make run". Esto generara las
 imagenes para probar y la experimentacion propuesta por el grupo.
