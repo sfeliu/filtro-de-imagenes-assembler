@@ -10,9 +10,9 @@ for i in range(1, 21):
 	imagen = '../exp/img/VarXY/' + str(i) + '.bmp'
 	time = 0;
 	for j in range(0, 5):
-		p = sub.Popen(['./../build/tp2', 'temperature', '-i', 'asm', imagen], stderr=sub.PIPE)
+		p = sub.Popen(['./../build/tp2', 'temperature', '-i', 'asm', '-t', '5', imagen], stderr=sub.PIPE)
 		output, errors = p.communicate()
-		time = time + int(errors)
+		time = time + float(errors)
 	f.write(str(time/5) + '\n')
 f.close()
 
@@ -25,9 +25,9 @@ for i in range(1, 21):
 	imagen = '../exp/img/VarXY/' + str(i) + '.bmp'
 	time = 0;
 	for j in range(0, 5):
-		p = sub.Popen(['./../build/tp2', 'temperature', '-i', 'c', imagen], stderr=sub.PIPE)
+		p = sub.Popen(['./../build/tp2', 'temperature', '-i', 'c', '-t', '5', imagen], stderr=sub.PIPE)
 		output, errors = p.communicate()
-		time = time + int(errors)
+		time = time + float(errors)
 	f.write(str(time/5) + '\n')
 f.close()
 
@@ -40,9 +40,9 @@ for i in range(1, 21):
 	imagen = '../exp/img/VarXY/' + str(i) + '.bmp'
 	time = 0;
 	for j in range(0, 5):
-		p = sub.Popen(['./../build/tp2O3', 'temperature', '-i', 'c', imagen], stderr=sub.PIPE)
+		p = sub.Popen(['./../build/tp2O3', 'temperature', '-i', 'c', '-t', '5', imagen], stderr=sub.PIPE)
 		output, errors = p.communicate()
-		time = time + int(errors)
+		time = time + float(errors)
 	f.write(str(time/5) + '\n')
 f.close()
 

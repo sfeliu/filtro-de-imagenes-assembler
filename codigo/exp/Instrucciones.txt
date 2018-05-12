@@ -1,6 +1,16 @@
-Para correr la experimentacion primero se deben descomentar las ultimas 2 lineas
-del archivo "tp2.c" y luego compilar normalmente.
-Siguiente a esto se debe entrar a la carpeta "exp", que es en la que se encuentra
-el codigo de la experimentacion y correr el comando "make run". Esto generara las
-imagenes para probar y la experimentacion propuesta por el grupo.
-Por ultimo si se desea se pueden borrar los datos obtenidos corriendo "make clean".
+Para correr la experimentación se debe hacer lo siguiente:
+
+1 - Abrir el Makefile ubicado en codigo/ y descomentar "#-O3" -> "-O3" en CFLAGS64 (linea 2), y guardar
+2 - Luego desde la consola, ubicado en la carpeta codigo, realizar:
+	$ make all
+	$ mv build/tp2 tp2O3
+3 - Seguido a esto volver a comentar el Makefile antes modificado "-O3" -> "#-O3" en CFLAGS64 (linea 2), y guardar
+4 - Luego desde la consola, ubicado en la carpeta codigo, realizar:
+	$ make clean
+	$ make all
+	$ mv tp2O3 build/
+5 - Una vez hecho esto estarán generados todos los ejecutables, solo resta correr la experimentación y
+	para esto desde la consola, ubicado en la carpeta codigo, realizar:
+	$ cd exp/
+	$ make run
+6 - Se pueden observar los resultados en la carpeta exp/plot_result , exp/txt_result , exp/img .

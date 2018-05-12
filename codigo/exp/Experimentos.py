@@ -53,11 +53,14 @@ CBlitXY = BCXY.ix[:,0]
 C3BlitXY = BC3XY.ix[:,0]
 
 plt.figure()
+ABlitXY = np.log(ABlitXY)
+CBlitXY = np.log(CBlitXY)
+C3BlitXY = np.log(C3BlitXY)
 plt.plot(ABlitXY, "c", label="Blit implementado en ASM")
 plt.plot(CBlitXY, "m", label="Blit implementado en C")
 plt.plot(C3BlitXY, "k", label="Blit implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Ciclos de clock")
+plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
 plt.legend()
 plt.savefig("Exp_BlitXY.png")
 
@@ -70,11 +73,14 @@ CEdgeXY = ECXY.ix[:,0]
 C3EdgeXY = EC3XY.ix[:,0]
 
 plt.figure()
+AEdgeXY = np.log(AEdgeXY)
+CEdgeXY = np.log(CEdgeXY)
+C3EdgeXY = np.log(C3EdgeXY)
 plt.plot(AEdgeXY, "c", label="Edge implementado en ASM")
 plt.plot(CEdgeXY, "m", label="Edge implementado en C")
 plt.plot(C3EdgeXY, "k", label="Edge implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Ciclos de clock")
+plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
 plt.legend()
 plt.savefig("Exp_EdgeXY.png")
 
@@ -87,11 +93,14 @@ CMonoXY = MCXY.ix[:,0]
 C3MonoXY = MC3XY.ix[:,0]
 
 plt.figure()
+AMonoXY = np.log(AMonoXY)
+CMonoXY = np.log(CMonoXY)
+C3MonoXY = np.log(C3MonoXY)
 plt.plot(AMonoXY, "c", label="Monocromatizar implementado en ASM")
 plt.plot(CMonoXY, "m", label="Monocromatizar implementado en C")
 plt.plot(C3MonoXY, "k", label="Monocromatizar implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Ciclos de clock")
+plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
 plt.legend()
 plt.savefig("Exp_MonoXY.png")
 
@@ -104,11 +113,14 @@ COndasXY = OCXY.ix[:,0]
 C3OndasXY = OC3XY.ix[:,0]
 
 plt.figure()
+AOndasXY = np.log(AOndasXY)
+COndasXY = np.log(COndasXY)
+C3OndasXY = np.log(C3OndasXY)
 plt.plot(AOndasXY, "c", label="Ondas implementado en ASM")
 plt.plot(COndasXY, "m", label="Ondas implementado en C")
 plt.plot(C3OndasXY, "k", label="Ondas implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Ciclos de clock")
+plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
 plt.legend()
 plt.savefig("Exp_OndasXY.png")
 
@@ -121,11 +133,14 @@ CTempXY = TCXY.ix[:,0]
 C3TempXY = TC3XY.ix[:,0]
 
 plt.figure()
+ATempXY = np.log(ATempXY)
+CTempXY = np.log(CTempXY)
+C3TempXY = np.log(C3TempXY)
 plt.plot(ATempXY, "c", label="Temperature implementado en ASM")
 plt.plot(CTempXY, "m", label="Temperature implementado en C")
 plt.plot(C3TempXY, "k", label="Temperature implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Ciclos de clock")
+plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
 plt.legend()
 plt.savefig("Exp_TempXY.png")
 ################################################################################

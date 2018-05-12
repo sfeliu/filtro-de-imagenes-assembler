@@ -1,7 +1,5 @@
 
-CFLAGS64 = -ggdb -Wall -Wno-unused-parameter -Wextra -std=c99 -pedantic -m64
-#CFLAGS64 = -O3 -Wall -std=c99 -pedantic -m64
-
+CFLAGS64 = -ggdb -Wall -Wno-unused-parameter -Wextra -std=c99 -pedantic -m64 #-O3
 
 CFLAGS   = $(CFLAGS64)
 
@@ -22,7 +20,6 @@ OBJS_CON_PATH = $(addprefix $(BUILD_DIR)/, $(OBJS))
 
 all: $(BUILD_DIR)/$(BIN)
 
-
 $(BUILD_DIR)/$(BIN): FORCE $(MAIN_OBJS_CON_PATH)
 	$(CC) $(CFLAGS) $(OBJS_CON_PATH) -o $@ -lm
 
@@ -36,7 +33,3 @@ $(BUILD_DIR)/%.o: %.c
 
 clean:
 	rm -fr $(BUILD_DIR)/*
-
-
-
-
