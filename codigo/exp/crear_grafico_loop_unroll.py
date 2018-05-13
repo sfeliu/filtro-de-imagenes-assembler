@@ -52,7 +52,7 @@ CMono = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000),
 fig = plt.figure()
 x = range(0, len(CMono))
 plt.bar(x, CMono)
-plt.xlabel("Tamaño de la imagen")
+plt.xlabel("Cantidad de macros seguidas")
 plt.ylabel("Cantidad de miles de ciclos de clock")
 plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048'])

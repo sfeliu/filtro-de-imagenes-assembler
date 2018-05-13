@@ -26,5 +26,5 @@ memory_clocks = memory_clocks/total
 process_clocks = process_clocks/total
 total_clocks = total_clocks/total
 
-f.write(str(int(total_clocks)) + ', ' + str(int(memory_clocks)) + ', ' + str(int(process_clocks)) + '\n')
+f.write(str(int(total_clocks)) + ' ' + str(int(memory_clocks)) + ' ' + str(int(process_clocks)) + '\n')
 f.close()

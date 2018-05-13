@@ -74,6 +74,11 @@ run3 :
 	python3 cuello_de_botella_tiempos.py
 	python3 mover_file.py False cuello_de_botella monocromatizar_inf_asm.asm monocromatizar_inf_asm.asm
 
+	python3 crear_grafico_cuello_botella.py
+	mv *.png plot_result/
+
+	rm -fr ../filtros_backup
+	rm -fr *.bmp
 
 clean :
 	rm -fr txt_result/*.txt
