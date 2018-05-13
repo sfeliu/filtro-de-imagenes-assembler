@@ -65,6 +65,7 @@ run2 :
 	python3 crear_grafico_loop_unroll.py
 	mv *.png plot_result/
 
+	rm -fr ../filtros_backup
 	rm -fr *.bmp
 
 run3 :
