@@ -13,6 +13,11 @@ run :
 
 run2 :
 	python3 GenerarTamanos.py
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_1.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 1
+	python3 mover_file.py False loop_unroll loop_unroll_caso_1.asm monocromatizar_inf_asm.asm
+
 	python3 mover_file.py True loop_unroll loop_unroll_caso_2.asm monocromatizar_inf_asm.asm
 	python3 loop_unroll_tiempos.py 2
 	python3 mover_file.py False loop_unroll loop_unroll_caso_2.asm monocromatizar_inf_asm.asm

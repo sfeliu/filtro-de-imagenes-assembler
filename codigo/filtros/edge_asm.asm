@@ -70,6 +70,7 @@ edge_asm:
 	push rcx
 	push rdx
 	push r8
+	push r13
 
 	mov r13, rdx									; r13 = Ancho
 	mov r11, rdx
@@ -102,7 +103,6 @@ edge_asm:
 			pxor xmm7, xmm7
 			pxor xmm8, xmm8
 			pxor xmm9, xmm9		
-			xor r15, r15
 			mov r8, 12
 
 													; IMG = |P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|P|
@@ -277,6 +277,7 @@ edge_asm:
 		cmp rcx, 0
 		jg .ciclo_fila
 
+	pop r13
 	pop r8
 	pop rdx
 	pop rcx

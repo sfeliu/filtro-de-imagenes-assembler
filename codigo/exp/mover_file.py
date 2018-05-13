@@ -11,10 +11,10 @@ if ida == 'True':
 	os.makedirs(parent_dir + '/filtros_backup', exist_ok=True)
 	os.rename(parent_dir + '/filtros/' + codigo_original, parent_dir + '/filtros_backup/' + codigo_original)
 	os.rename(parent_dir + '/exp/' + directorio_codigo_a_probar + '/' + codigo_a_probar, parent_dir + '/filtros/' + codigo_original)
-	p = sub.Popen('make', cwd=parent_dir + '/', shell=True)
+	p = sub.Popen('make', cwd=parent_dir + '/', shell=True, stdout=sub.PIPE)
 	p.communicate()
 else:
 	os.rename(parent_dir + '/filtros/' + codigo_original, parent_dir + '/exp/'  + directorio_codigo_a_probar + '/' + codigo_a_probar)
 	os.rename(parent_dir + '/filtros_backup/' + codigo_original, parent_dir + '/filtros/' + codigo_original)
-	p = sub.Popen('make clean', cwd=parent_dir + '/', shell=True)
+	p = sub.Popen('make clean', cwd=parent_dir + '/', shell=True, stdout=sub.PIPE)
 	p.communicate()

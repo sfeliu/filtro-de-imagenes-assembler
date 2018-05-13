@@ -83,6 +83,11 @@ monocromatizar_inf_asm:
 		%endmacro
 
 	mov rax, rcx
+	mov r8, 16
+	div r8
+	cmp rdx, 0
+	je .caso_multiplo_16
+	mov rax, rcx
 	jmp .caso_multiplo_1
 
 	.caso_multiplo_1:
@@ -90,6 +95,28 @@ monocromatizar_inf_asm:
 		dec rax
 		cmp rax, 0
 		jne .caso_multiplo_1
+		jmp .fin
+
+	.caso_multiplo_16:
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		ciclo
+		dec rax
+		cmp rax, 0
+		jne .caso_multiplo_16
 		jmp .fin
 
 	.fin:
