@@ -53,18 +53,16 @@ monocromatizar_inf_asm:
 		pxor xmm4, xmm4
 		pxor xmm5, xmm5
 		
-		xor rax, rax
-		cpuid
-		rdtsc
+		
+		rdtscp
 		shl rdx, 32
 		or rdx, rax
 		mov r8, rdx
 		
 		movdqu xmm1, [rdi]						; xmm1 = |A|R|G|B|A|R|G|B|A|R|G|B|A|R|G|B| = |PIXEL|PIXEL|PIXEL|PIXEL|
 				
-		xor rax, rax
-		cpuid
-		rdtsc
+		
+		rdtscp
 		shl rdx, 32
 		or rdx, rax
 		mov r9, rdx
@@ -104,9 +102,8 @@ monocromatizar_inf_asm:
 		pslld xmm1, 24							; xmm1 = |A|0|0|0|A|0|0|0|A|0|0|0|A|0|0|0|
 		por xmm2, xmm1							; xmm2 = |A|R|R|R|A|R|R|R|A|G|G|G|A|B|B|B|
 
-		xor rax, rax
-		cpuid
-		rdtsc
+		
+		rdtscp
 		shl rdx, 32
 		or rdx, rax
 		mov r8, rdx
@@ -116,9 +113,8 @@ monocromatizar_inf_asm:
 
 		movdqu [rsi], xmm2
 		
-		xor rax, rax
-		cpuid
-		rdtsc
+
+		rdtscp
 		shl rdx, 32
 		or rdx, rax
 		mov r9, rdx

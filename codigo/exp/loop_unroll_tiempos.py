@@ -15,5 +15,5 @@ for j in range(0, 10):
     p = sub.Popen(['./../build/tp2', 'monocromatizar_inf', '-i', 'asm', '-t', '100', imagen], stderr=sub.PIPE)
     output, errors = p.communicate()
     time = time + float(errors)
-f.write(str(time/5) + '\n')
+f.write(str(time/10) + '\n')
 f.close()
