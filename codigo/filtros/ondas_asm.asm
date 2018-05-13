@@ -48,6 +48,12 @@ ondas_asm:
 	mov r13, [rbp +24]
 	pxor xmm0, xmm0;
 	movdqu xmm10, [maskalpha]
+	movdqu xmm11, [radius]
+	movdqu xmm12, [pi]
+	movdqu xmm13, [wavelength]
+	movdqu xmm14, [trainwidth]
+
+
 
 	.ciclo:
 		movdqu xmm0, [rdi]				;xmm0 = [{r1,g1,b1,a1} = P_{x,y} , {r2,g2,b2,a2} = P_{x+1,y} , ...]
@@ -83,68 +89,66 @@ ondas_asm:
 		cvtdq2ps xmm1, xmm1
 		sqrtps xmm1, xmm1				;xmm5 = [d_{x,y} = sqrt((d_x)^2+(d_y)^2) | ...]
 
-		movups xmm2, [radius]
-		movups xmm3, [pi]
-		movups xmm4, [wavelength]
-		movups xmm5, [trainwidth]
+		;movups xmm2, [radius]
+		;movups xmm3, [pi]
+		;movups xmm4, [wavelength]
+		;movups xmm5, [trainwidth]
 
-		subps xmm1, xmm2				;xmm5 = [(d_{x,y} - radius) | (d_{x+1,y+1}-radius) | ...]
-		divps xmm1, xmm4				;xmm5 = [(d_{x,y} - radius / wavelength) | (d_{x+1,y}-radius /wavelength) | ...]
+		subps xmm1, xmm11				;xmm5 = [(d_{x,y} - radius) | (d_{x+1,y+1}-radius) | ...]
+		divps xmm1, xmm13				;xmm5 = [(d_{x,y} - radius / wavelength) | (d_{x+1,y}-radius /wavelength) | ...]
 
 
 		;cual es la diferencia entre mulps y pmuldq ?? creo que pmuldq es para double-precision floats 
 
 		movups xmm6, xmm1				;xmm6 = xmm1 = [r1|r2|r3|r4]
-		divps xmm6, xmm5				;xmm6 = [r1/trainwidth | r2/trainwidth |...]
+		divps xmm6, xmm14				;xmm6 = [r1/trainwidth | r2/trainwidth |...]
 		mulps xmm6, xmm6 				;xmm6 = [(r1/trainwidth)^2 | (r2/trainwidth)^2 | ...]
 		movups xmm5, [cte1]
 		addps xmm6, xmm5				;xmm6 = [(r1/trainwidth)^2 + 1 | (r2/trainwidth)^2 + 1 | ...]
-		divps xmm5, xmm6				;xmm4 = [1 / ((r1/trainwidth)^2 +1) | 1 / ((r2/trainwidth)^2 +1) | ...]
+		divps xmm5, xmm6				;xmm5 = [1 / ((r1/trainwidth)^2 +1) | 1 / ((r2/trainwidth)^2 +1) | ...]
 
-		;cvttps2dq xmm7, xmm1			;xmm2 = [floor((d_xy - radius / wavelength)) | ... ]
 		roundps xmm7, xmm1, 1
-		;cvtdq2ps xmm7, xmm7
-		subps xmm1, xmm7				;xmm5 = [(d_xy - radius / wavelength) - floor(d_xy - radius / wavelength) | ... ]
+		subps xmm1, xmm7				;xmm1 = [(d_xy - radius / wavelength) - floor(d_xy - radius / wavelength) | ... ]
 		movups xmm4, [cte2] 
-		mulps xmm1, xmm4				;xmm5 = [(r1-floor(r1))*2 | (r2 - floor(r2))*2 | ...]
-		mulps xmm1, xmm3				;xmm5 = [(r1-floor(r1))*2*pi | (r2 - floor(r2))*2*pi | ...]
-		subps xmm1, xmm3				;xmm5 = [(r1-floor(r1))*2*pi - pi | (r2 - floor(r2))*2*pi - pi | ...]
+		mulps xmm1, xmm4				;xmm1 = [(r1-floor(r1))*2 | (r2 - floor(r2))*2 | ...]
+		mulps xmm1, xmm12				;xmm1 = [(r1-floor(r1))*2*pi | (r2 - floor(r2))*2*pi | ...]
+		subps xmm1, xmm12				;xmm1 = [(r1-floor(r1))*2*pi - pi | (r2 - floor(r2))*2*pi - pi | ...]
 
 
 		;Empezando aca calculo (t - (t^2)/6 + (t^5)/120 - (t^7)/5040)
 		movups xmm3, [cte6] 			;xmm3 = [6|6|6|6]
 
-		movups xmm2, xmm1				;xmm1 = [t1 | t2 | t3 | t4]
-		movups xmm4, xmm1				;xmm2 = [t1 | t2 | t3 | t4]
+		movups xmm2, xmm1				;xmm2 = [t1 | t2 | t3 | t4]
+		movups xmm4, xmm1				;xmm4 = [t1 | t2 | t3 | t4]
 		mulps xmm2, xmm2				;xmm2 = [(t1)^2 | (t2)^2 | (t3)^2 | (t4)^2]
 		mulps xmm2, xmm1				;xmm2 = [(t1)^3 | (t2)^3 | (t3)^3 | (t4)^3]
 		divps xmm2, xmm3				;xmm2 = [ ((t1)^3)/6 | ((t2)^3)/6 | ((t3)^3)/6 | ((t4)^3)/6]
 
-		subps xmm4, xmm2				;xmm5 = [t1 - ((t1)^3)/6 | ... ]
+		subps xmm4, xmm2				;xmm4 = [t1 - ((t1)^3)/6 | ... ]
 		
 		movups xmm3, [cte120]			;xmm3 = [120|120|120|120]
 
-		movups xmm2, xmm1				;xmm1 = [t1 | t2 | t3 | t4]
+		movups xmm2, xmm1				;xmm2 = [t1 | t2 | t3 | t4]
 		mulps xmm2, xmm2				;xmm2 = [(t1)^2 | (t2)^2 | (t3)^2 | (t4)^2]---------
 		mulps xmm2, xmm2				;xmm2 = [(t1)^4 | (t2)^4 | (t3)^4 | (t4)^4]---------
 		mulps xmm2, xmm1				;xmm2 = [(t1)^5 | (t2)^5 | (t3)^5 | (t4)^5]---------------
 		divps xmm2, xmm3				;xmm2 = [((t1)^5)/120 | ((t2)^5)/120 | ((t3)^5)/120 | ((t4)^5)/120]
 
-		addps xmm4, xmm2				;xmm5 = [t1 - ((t1)^3)/6 + ((t1)^5)/120 | ... ]
+		addps xmm4, xmm2				;xmm4 = [t1 - ((t1)^3)/6 + ((t1)^5)/120 | ... ]
 
 		movups xmm3, [cte5040]			;xmm3 = [5040|5040|5040|5040]
 
-		movups xmm2, xmm1				;xmm1 = [t1 | t2 | t3 | t4]
+		movups xmm2, xmm1				;xmm2 = [t1 | t2 | t3 | t4]
 		mulps xmm2, xmm2				;xmm2 = [(t1)^2 | (t2)^2 | (t3)^2 | (t4)^2]
 		mulps xmm2, xmm2				;xmm2 = [(t1)^4 | (t2)^4 | (t3)^4 | (t4)^4]
 		mulps xmm2, xmm1				;xmm2 = [(t1)^5 | (t2)^5 | (t3)^5 | (t4)^5]
 		mulps xmm2, xmm1				;xmm2 = [(t1)^6 | (t2)^6 | (t3)^6 | (t4)^6]
 		mulps xmm2, xmm1				;xmm2 = [(t1)^7 | (t2)^7 | (t3)^7 | (t4)^7]
 		divps xmm2, xmm3				;xmm2 = [((t1)^7)/5040 | ((t2)^7)/5040 |((t3)^7)/5040 |((t4)^7)/5040]
-		subps xmm4, xmm2				;xmm5 = [t1 - ((t1)^3)/6 + ((t1)^5)/120 - ((t1)^7)/5040  | ... ]
+		subps xmm4, xmm2				;xmm4 = [t1 - ((t1)^3)/6 + ((t1)^5)/120 - ((t1)^7)/5040  | ... ]
 
 		mulps xmm4, xmm5				;xmm4 = [prof1|prof2|prof3|prof4]
-		movups xmm2, [wavelength]		;xmm2 = [64|64|64|64]
+		movups xmm2, xmm13				;xmm2 = [64|64|64|64]
 		mulps xmm4, xmm2				;xmm4 = [(prof1)*64|(prof2)*64| ...]
 
 		roundps xmm4, xmm4 ,1
@@ -152,23 +156,18 @@ ondas_asm:
 
 		;desempaqueto xmm0 de byte a word en xmm0 y xmm2
 		pxor xmm1, xmm1
-		;pcmpgtd xmm1, xmm0;
 		movdqu xmm2, xmm0;
 
 		punpckhbw xmm0, xmm1
 		punpcklbw xmm2, xmm1
 
 		;desempaqueto xmm0 de word a double-word en xmm0 y xmm2
-		;pxor xmm1, xmm1
-		;pcmpgtw xmm1, xmm0
 		movdqu xmm6, xmm0;
 
 		punpckhwd xmm0, xmm1			;xmm0 = [pixel1]
 		punpcklwd xmm6, xmm1			;xmm6 = [pixel2]
 
 		;desempaqueto xmm2 de word a double-word en xmm2 y xmm7 
-		;pxor xmm1, xmm1
-		;pcmpgtw xmm1, xmm2
 		movdqu xmm7, xmm2
 
 		punpckhwd xmm2, xmm1			;xmm2 = [pixel3]
@@ -202,14 +201,6 @@ ondas_asm:
 		
 		packuswb xmm7, xmm6;
 		movdqu [rsi], xmm7				;dest[0..15] = xmm4
-
-
-		;packusdw xmm4, xmm4	
-		;packuswb xmm4, xmm4;
-		;movdqu xmm3, [mask]
-		;pshufb xmm4, xmm3				;xmm6 = [prof1|prof1|prof1|0|prof2|prof2|prof2|0|porf3 ...]
-		;paddusb xmm0, xmm4				;xmm6 = [saturate((prof1)*64 + src[x][y]) | saturate((prof2)*64 + src[x+1][y]) | ...]
-		;movdqu [rsi], xmm0				;dest[0..15] = xmm4
 
 		add rsi, 16
 		add rdi, 16
