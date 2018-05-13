@@ -61,8 +61,10 @@ plt.plot(CBlitXY, "m", label="Blit implementado en C")
 plt.plot(C3BlitXY, "k", label="Blit implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
+plt.xticks([0, 3, 6, 9, 12, 15, 18],
+		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
 plt.legend()
-plt.savefig("Exp_BlitXY.png")
+plt.savefig("ExpBlitXY.png")
 
 ################################################################################
 
@@ -81,8 +83,10 @@ plt.plot(CEdgeXY, "m", label="Edge implementado en C")
 plt.plot(C3EdgeXY, "k", label="Edge implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
+plt.xticks([0, 3, 6, 9, 12, 15, 18],
+		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
 plt.legend()
-plt.savefig("Exp_EdgeXY.png")
+plt.savefig("ExpEdgeXY.png")
 
 ################################################################################
 
@@ -101,8 +105,10 @@ plt.plot(CMonoXY, "m", label="Monocromatizar implementado en C")
 plt.plot(C3MonoXY, "k", label="Monocromatizar implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
+plt.xticks([0, 3, 6, 9, 12, 15, 18],
+		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
 plt.legend()
-plt.savefig("Exp_MonoXY.png")
+plt.savefig("ExpMonoXY.png")
 
 ################################################################################
 
@@ -121,8 +127,10 @@ plt.plot(COndasXY, "m", label="Ondas implementado en C")
 plt.plot(C3OndasXY, "k", label="Ondas implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
+plt.xticks([0, 3, 6, 9, 12, 15, 18],
+		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
 plt.legend()
-plt.savefig("Exp_OndasXY.png")
+plt.savefig("ExpOndasXY.png")
 
 ################################################################################
 
@@ -141,6 +149,8 @@ plt.plot(CTempXY, "m", label="Temperature implementado en C")
 plt.plot(C3TempXY, "k", label="Temperature implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
+plt.xticks([0, 3, 6, 9, 12, 15, 18],
+		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
 plt.legend()
-plt.savefig("Exp_TempXY.png")
+plt.savefig("ExpTempXY.png")
 ################################################################################
