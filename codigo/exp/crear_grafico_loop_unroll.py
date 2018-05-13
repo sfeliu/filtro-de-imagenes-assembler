@@ -43,22 +43,14 @@ CMono256 = MC256.ix[:,0]
 CMono512 = MC512.ix[:,0]
 CMono1024 = MC1024.ix[:,0]
 
-plt.figure()
-CMono1 = np.log(CMono1)
-CMono2 = np.log(CMono2)
-CMono4 = np.log(CMono4)
-CMono8 = np.log(CMono8)
-CMono16 = np.log(CMono16)
-CMono32 = np.log(CMono32)
-CMono64 = np.log(CMono64)
-CMono128 = np.log(CMono128)
-CMono256 = np.log(CMono256)
-CMono512 = np.log(CMono512)
-CMono1024 = np.log(CMono1024)
-plt.plot(AMonoXY, "c", label="Monocromatizar implementado en ASM")
-plt.plot(CMonoXY, "m", label="Monocromatizar implementado en C")
-plt.plot(C3MonoXY, "k", label="Monocromatizar implementado en C O3")
+CMono = [int(CMono1), int(CMono2), int(CMono4), int(CMono8), int(CMono16),
+			int(CMono32), int(CMono64), int(CMono128), int(CMono256), int(CMono512), int(CMono1024)]
+
+fig = plt.figure()
+x = range(0, len(CMono))
+plt.bar(x, CMono)
 plt.xlabel("Tamaño de la imagen")
-plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.legend()
+plt.ylabel("Cantidad de ciclos de clock")
+plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024'])
 plt.savefig("Exp_MonoXY.png")

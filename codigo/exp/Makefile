@@ -58,9 +58,13 @@ run2 :
 	python3 loop_unroll_tiempos.py 1024
 	python3 mover_file.py False loop_unroll loop_unroll_caso_1024.asm monocromatizar_inf_asm.asm
 
+	python3 crear_grafico_loop_unroll.py
+	mv *.png plot_result/
+
+	rm -fr *.bmp
 
 run3 :
-	
+
 	python3 mover_file.py True cuello_de_botella monocromatizar_inf_asm.asm monocromatizar_inf_asm.asm
 	python3 cuello_de_botella_tiempos.py
 	python3 mover_file.py False cuello_de_botella monocromatizar_inf_asm.asm monocromatizar_inf_asm.asm
@@ -69,7 +73,4 @@ run3 :
 clean :
 	rm -fr txt_result/*.txt
 	rm -fr plot_result/*.png
-	rm -fr img/VarX/*.bmp
 	rm -fr img/VarXY/*.bmp
-	rm -fr img/VarY/*.bmp
-	rm -fr img/VarXY_const/*.bmp
