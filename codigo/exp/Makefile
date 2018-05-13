@@ -58,6 +58,10 @@ run2 :
 	python3 loop_unroll_tiempos.py 1024
 	python3 mover_file.py False loop_unroll loop_unroll_caso_1024.asm monocromatizar_inf_asm.asm
 
+	python3 mover_file.py True loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 2048
+	python3 mover_file.py False loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
+
 	python3 crear_grafico_loop_unroll.py
 	mv *.png plot_result/
 
