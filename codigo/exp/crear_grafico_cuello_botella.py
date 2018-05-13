@@ -23,3 +23,12 @@ plt.pie(Times, labels=Datos, autopct='%1.1f%%')
 plt.axis('equal')
 plt.title("Cantidad de ciclos de clock")
 plt.savefig("ExpCuelloBotella.png")
+
+Times = [int(TMemoria), int(TProc)]
+Datos = ["Memoria", "Procesamiento"]
+
+fig = plt.figure()
+plt.pie(Times, labels=Datos, autopct='%1.1f%%')
+plt.axis('equal')
+plt.title("Cantidad de ciclos de clock")
+plt.savefig("ExpCuelloBotella2.png")
