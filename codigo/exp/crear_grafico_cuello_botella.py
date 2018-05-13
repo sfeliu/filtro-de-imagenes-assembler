@@ -17,7 +17,7 @@ TProc = MCB.ix[:,2]
 
 Times = [int(TExtra), int(TMemoria), int(TProc)]
 Datos = ["Extras", "Memoria", "Procesamiento"]
-Colores = ['Purple', 'Orange', 'Green']
+Colores = ['Blue', 'Orange', 'Green']
 
 fig = plt.figure()
 plt.pie(Times, colors=Colores, labels=Datos, autopct='%1.1f%%')
