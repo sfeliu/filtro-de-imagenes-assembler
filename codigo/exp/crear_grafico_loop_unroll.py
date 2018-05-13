@@ -27,6 +27,8 @@ MC256 = pd.read_csv('txt_result/TimeMonoLoopUnroll_caso_256.txt', delim_whitespa
 MC512 = pd.read_csv('txt_result/TimeMonoLoopUnroll_caso_512.txt', delim_whitespace = True)
 #MONOCROMATIZAR CASO 1024
 MC1024 = pd.read_csv('txt_result/TimeMonoLoopUnroll_caso_1024.txt', delim_whitespace = True)
+#MONOCROMATIZAR CASO 2048
+MC2048 = pd.read_csv('txt_result/TimeMonoLoopUnroll_caso_2048.txt', delim_whitespace = True)
 
 ################################################################################
 #Monocromatizar#################################################################
@@ -42,15 +44,16 @@ CMono128 = MC128.ix[:,0]
 CMono256 = MC256.ix[:,0]
 CMono512 = MC512.ix[:,0]
 CMono1024 = MC1024.ix[:,0]
+CMono2048 = MC2048.ix[:,0]
 
-CMono = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000), int(CMono16/1000),
-			int(CMono32/1000), int(CMono64/1000), int(CMono128/1000), int(CMono256/1000), int(CMono512/1000), int(CMono1024/1000)]
+CMono = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000), int(CMono16/1000), int(CMono32/1000),
+ 			int(CMono64/1000), int(CMono128/1000), int(CMono256/1000), int(CMono512/1000), int(CMono1024/1000), int(CMono2048/1000)]
 
 fig = plt.figure()
 x = range(0, len(CMono))
 plt.bar(x, CMono)
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de miles de ciclos de clock")
-plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024'])
+plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048'])
 plt.savefig("Exp_MonoXY.png")
