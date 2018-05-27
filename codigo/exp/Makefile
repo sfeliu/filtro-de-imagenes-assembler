@@ -80,6 +80,61 @@ run3 :
 	rm -fr ../filtros_backup
 	rm -fr *.bmp
 
+run4 :
+	python3 GenerarTamanos.py
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_1.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 1
+	python3 mover_file.py False loop_unroll loop_unroll_caso_1.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_2.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 2
+	python3 mover_file.py False loop_unroll loop_unroll_caso_2.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_4.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 4
+	python3 mover_file.py False loop_unroll loop_unroll_caso_4.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_8.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 8
+	python3 mover_file.py False loop_unroll loop_unroll_caso_8.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_16.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 16
+	python3 mover_file.py False loop_unroll loop_unroll_caso_16.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_32.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 32
+	python3 mover_file.py False loop_unroll loop_unroll_caso_32.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_64.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 64
+	python3 mover_file.py False loop_unroll loop_unroll_caso_64.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_128.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 128
+	python3 mover_file.py False loop_unroll loop_unroll_caso_128.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_256.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 256
+	python3 mover_file.py False loop_unroll loop_unroll_caso_256.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_512.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 512
+	python3 mover_file.py False loop_unroll loop_unroll_caso_512.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_1024.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 1024
+	python3 mover_file.py False loop_unroll loop_unroll_caso_1024.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 2048
+	python3 mover_file.py False loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
+
+
+	rm -fr ../filtros_backup
+	rm -fr *.bmp
+
 clean :
 	rm -fr txt_result/*.txt
 	rm -fr plot_result/*.png
