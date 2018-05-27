@@ -187,7 +187,7 @@ run4 :
 	python3 loop_unroll_tiempos.py 262144
 	python3 mover_file.py False loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
 
-	python3 crear_grafico_loop_unroll.py
+	python3 crear_grafico_loop_unroll_tamanos.py
 	mv *.png plot_result/
 
 	rm -fr ../filtros_backup

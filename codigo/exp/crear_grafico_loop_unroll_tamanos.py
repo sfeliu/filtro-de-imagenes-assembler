@@ -67,10 +67,30 @@ CMono65536 = MC65536.ix[:,0]
 CMono131072 = MC131072.ix[:,0]
 CMono262144 = MC262144.ix[:,0]
 
-CMono = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000), int(CMono16/1000), int(CMono32/1000),
- 			int(CMono64/1000), int(CMono128/1000), int(CMono256/1000), int(CMono512/1000), int(CMono1024/1000), int(CMono2048/1000),
- 			int(CMono4096/1000), int(CMono8192/1000), int(CMono16384/1000), int(CMono32768/1000), int(CMono65536/1000),
- 			 int(CMono131072/1000), int(CMono262144/1000)]
+CMono0 = [int(CMono1[0]/1000), int(CMono2[0]/1000), int(CMono4[0]/1000), int(CMono8[0]/1000), int(CMono16[0]/1000), int(CMono32[0]/1000),
+ 			int(CMono64[0]/1000), int(CMono128[0]/1000), int(CMono256[0]/1000), int(CMono512[0]/1000), int(CMono1024[0]/1000), int(CMono2048[0]/1000),
+ 			int(CMono4096[0]/1000), int(CMono8192[0]/1000), int(CMono16384[0]/1000), int(CMono32768[0]/1000), int(CMono65536[0]/1000),
+ 			 int(CMono131072[0]/1000), int(CMono262144[0]/1000)]
+
+CMono1 = [int(CMono1[1]/1000), int(CMono2[1]/1000), int(CMono4[1]/1000), int(CMono8[1]/1000), int(CMono16[1]/1000), int(CMono32[1]/1000),
+ 			int(CMono64[1]/1000), int(CMono128[1]/1000), int(CMono256[1]/1000), int(CMono512[1]/1000), int(CMono1024[1]/1000), int(CMono2048[1]/1000),
+ 			int(CMono4096[1]/1000), int(CMono8192[1]/1000), int(CMono16384[1]/1000), int(CMono32768[1]/1000), int(CMono65536[1]/1000),
+ 			 int(CMono131072[1]/1000), int(CMono262144[1]/1000)]
+
+CMono2 = [int(CMono1[2]/1000), int(CMono2[2]/1000), int(CMono4[2]/1000), int(CMono8[2]/1000), int(CMono16[2]/1000), int(CMono32[2]/1000),
+ 			int(CMono64[2]/1000), int(CMono128[2]/1000), int(CMono256[2]/1000), int(CMono512[2]/1000), int(CMono1024[2]/1000), int(CMono2048[2]/1000),
+ 			int(CMono4096[2]/1000), int(CMono8192[2]/1000), int(CMono16384[2]/1000), int(CMono32768[2]/1000), int(CMono65536[2]/1000),
+ 			 int(CMono131072[2]/1000), int(CMono262144[2]/1000)]
+
+CMono3 = [int(CMono1[3]/1000), int(CMono2[3]/1000), int(CMono4[3]/1000), int(CMono8[3]/1000), int(CMono16[3]/1000), int(CMono32[3]/1000),
+ 			int(CMono64[3]/1000), int(CMono128[3]/1000), int(CMono256[3]/1000), int(CMono512[3]/1000), int(CMono1024[3]/1000), int(CMono2048[3]/1000),
+ 			int(CMono4096[3]/1000), int(CMono8192[3]/1000), int(CMono16384[3]/1000), int(CMono32768[3]/1000), int(CMono65536[3]/1000),
+ 			 int(CMono131072[3]/1000), int(CMono262144[3]/1000)]
+
+CMono4 = [int(CMono1[4]/1000), int(CMono2[4]/1000), int(CMono4[4]/1000), int(CMono8[4]/1000), int(CMono16[4]/1000), int(CMono32[4]/1000),
+ 			int(CMono64[4]/1000), int(CMono128[4]/1000), int(CMono256[4]/1000), int(CMono512[4]/1000), int(CMono1024[4]/1000), int(CMono2048[4]/1000),
+ 			int(CMono4096[4]/1000), int(CMono8192[4]/1000), int(CMono16384[4]/1000), int(CMono32768[4]/1000), int(CMono65536[4]/1000),
+ 			 int(CMono131072[4]/1000), int(CMono262144[4]/1000)]
 
 fig = plt.figure()
 x = range(0, len(CMono0))
@@ -81,3 +101,22 @@ plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
 		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
 		    '65536', '131072', '262144'], rotation=25)
 plt.savefig("ExpLoopUnroll.png")
+
+plt.figure()
+logMono0 = np.log(CMono0)
+logMono1 = np.log(CMono1)
+logMono2 = np.log(CMono2)
+logMono3 = np.log(CMono3)
+logMono4 = np.log(CMono4)
+plt.plot(logMono0, "c", label="512x512")
+plt.plot(logMono1, "m", label="1024x1024")
+plt.plot(logMono2, "k", label="2048x2048")
+plt.plot(logMono3, "g", label="4096x4096")
+plt.plot(logMono4, "y", label="8192x8192")
+plt.xlabel("n*4 pixel procesados por ciclo")
+plt.ylabel("Cantidad de miles de ciclos de clock")
+plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
+		    '65536', '131072', '262144'], rotation=25)
+plt.legend()
+plt.savefig("ExpMuchasTA.png")

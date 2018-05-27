@@ -9,8 +9,8 @@ caso_loop_unroll = sys.argv[1]
 f = open('txt_result/TimeMonoLoopUnroll_caso_' + caso_loop_unroll  + '.txt', 'w')
 f.write('Tiempos' + '\n')
 # 14.bmp es la imagen con 512x512 bytes
-imagenes = ['../exp/img/VarXY/14.bmp', '../exp/img/VarXY/18.bmp', '../exp/img/VarXY/19.bmp', 
-            '../exp/img/VarXY/20.bmp', '../exp/img/VarXY/21.bmp', '../exp/img/VarXY/22.bmp']
+imagenes = ['../exp/img/VarXY/14.bmp', '../exp/img/VarXY/18.bmp', '../exp/img/VarXY/19.bmp',
+            '../exp/img/VarXY/20.bmp', '../exp/img/VarXY/21.bmp']
 time = 0;
 for imagen in imagenes:
     for j in range(0, 10):
