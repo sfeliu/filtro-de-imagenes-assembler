@@ -62,6 +62,34 @@ run2 :
 	python3 loop_unroll_tiempos.py 2048
 	python3 mover_file.py False loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
 
+	python3 mover_file.py True loop_unroll loop_unroll_caso_4096.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 4096
+	python3 mover_file.py False loop_unroll loop_unroll_caso_4096.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_8192.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 8192
+	python3 mover_file.py False loop_unroll loop_unroll_caso_8192.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_16384.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 16384
+	python3 mover_file.py False loop_unroll loop_unroll_caso_16384.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_32768.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 32768
+	python3 mover_file.py False loop_unroll loop_unroll_caso_32768.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_65536.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 65536
+	python3 mover_file.py False loop_unroll loop_unroll_caso_65536.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_131072.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 131072
+	python3 mover_file.py False loop_unroll loop_unroll_caso_131072.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 262144
+	python3 mover_file.py False loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
+
 	python3 crear_grafico_loop_unroll.py
 	mv *.png plot_result/
 
@@ -130,6 +158,34 @@ run4 :
 	python3 mover_file.py True loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
 	python3 loop_unroll_tiempos_tamanos.py 2048
 	python3 mover_file.py False loop_unroll loop_unroll_caso_2048.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_4096.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 4096
+	python3 mover_file.py False loop_unroll loop_unroll_caso_4096.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_8192.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 8192
+	python3 mover_file.py False loop_unroll loop_unroll_caso_8192.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_16384.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos_tamanos.py 16384
+	python3 mover_file.py False loop_unroll loop_unroll_caso_16384.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_32768.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 32768
+	python3 mover_file.py False loop_unroll loop_unroll_caso_32768.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_65536.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 65536
+	python3 mover_file.py False loop_unroll loop_unroll_caso_65536.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_131072.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 131072
+	python3 mover_file.py False loop_unroll loop_unroll_caso_131072.asm monocromatizar_inf_asm.asm
+
+	python3 mover_file.py True loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
+	python3 loop_unroll_tiempos.py 262144
+	python3 mover_file.py False loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
 
 
 	rm -fr ../filtros_backup
