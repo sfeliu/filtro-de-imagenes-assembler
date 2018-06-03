@@ -52,6 +52,14 @@ ABlitXY = BAXY.ix[:,0]
 CBlitXY = BCXY.ix[:,0]
 C3BlitXY = BC3XY.ix[:,0]
 
+MinABlitXY = BAXY.ix[:,1]
+MinCBlitXY = BCXY.ix[:,1]
+MinC3BlitXY = BC3XY.ix[:,1]
+
+MaxABlitXY = BAXY.ix[:,2]
+MaxCBlitXY = BCXY.ix[:,2]
+MaxC3BlitXY = BC3XY.ix[:,2]
+
 plt.figure()
 ABlitXY = np.log(ABlitXY)
 CBlitXY = np.log(CBlitXY)
@@ -73,6 +81,14 @@ plt.savefig("ExpBlitXY.png")
 AEdgeXY = EAXY.ix[:,0]
 CEdgeXY = ECXY.ix[:,0]
 C3EdgeXY = EC3XY.ix[:,0]
+
+MinAEdgeXY = EAXY.ix[:,1]
+MinCEdgeXY = ECXY.ix[:,1]
+MinC3EdgeXY = EC3XY.ix[:,1]
+
+MaxAEdgeXY = EAXY.ix[:,2]
+MaxCEdgeXY = ECXY.ix[:,2]
+MaxC3EdgeXY = EC3XY.ix[:,2]
 
 plt.figure()
 AEdgeXY = np.log(AEdgeXY)
@@ -96,6 +112,14 @@ AMonoXY = MAXY.ix[:,0]
 CMonoXY = MCXY.ix[:,0]
 C3MonoXY = MC3XY.ix[:,0]
 
+MinAMonoXY = MAXY.ix[:,1]
+MinCMonoXY = MCXY.ix[:,1]
+MinC3MonoXY = MC3XY.ix[:,1]
+
+MaxAMonoXY = MAXY.ix[:,2]
+MaxCMonoXY = MCXY.ix[:,2]
+MaxC3MonoXY = MC3XY.ix[:,2]
+
 plt.figure()
 AMonoXY = np.log(AMonoXY)
 CMonoXY = np.log(CMonoXY)
@@ -118,6 +142,14 @@ AOndasXY = OAXY.ix[:,0]
 COndasXY = OCXY.ix[:,0]
 C3OndasXY = OC3XY.ix[:,0]
 
+MinAOndasXY = OAXY.ix[:,1]
+MinCOndasXY = OCXY.ix[:,1]
+MinC3OndasXY = OC3XY.ix[:,1]
+
+MaxAOndasXY = OAXY.ix[:,2]
+MaxCOndasXY = OCXY.ix[:,2]
+MaxC3OndasXY = OC3XY.ix[:,2]
+
 plt.figure()
 AOndasXY = np.log(AOndasXY)
 COndasXY = np.log(COndasXY)
@@ -139,6 +171,14 @@ plt.savefig("ExpOndasXY.png")
 ATempXY = TAXY.ix[:,0]
 CTempXY = TCXY.ix[:,0]
 C3TempXY = TC3XY.ix[:,0]
+
+MinATempXY = TAXY.ix[:,1]
+MinCTempXY = TCXY.ix[:,1]
+MinC3TempXY = TC3XY.ix[:,1]
+
+MaxATempXY = TAXY.ix[:,2]
+MaxCTempXY = TCXY.ix[:,2]
+MaxC3TempXY = TC3XY.ix[:,2]
 
 plt.figure()
 ATempXY = np.log(ATempXY)
