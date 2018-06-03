@@ -25,7 +25,7 @@ section .rodata
 
 section .text
 
-%macro 1000NOP 0
+%macro nopmacros 0
 		NOP
 		NOP
 		NOP
@@ -1101,7 +1101,7 @@ monocromatizar_inf_asm:
 		jmp .fin
 
 	.caso_multiplo_32768:
-		1000NOP
+		nopmacros
 		ciclo
 		ciclo
 		ciclo
