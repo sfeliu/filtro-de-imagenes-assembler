@@ -1103,6 +1103,15 @@ monocromatizar_inf_asm:
 
 	.caso_multiplo_2:
 		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
+		nopmacro
 		ciclo
 		ciclo
 		dec rax

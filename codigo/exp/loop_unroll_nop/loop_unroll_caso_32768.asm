@@ -1102,6 +1102,15 @@ monocromatizar_inf_asm:
 
 	.caso_multiplo_32768:
 		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
+		nopmacros
 		ciclo
 		ciclo
 		ciclo
