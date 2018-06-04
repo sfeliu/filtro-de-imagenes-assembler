@@ -1042,6 +1042,7 @@ monocromatizar_inf_asm:
 	movdqu xmm7, [negativos]
 
 	%macro ciclo 0
+		nopmacro
 		pxor xmm2, xmm2
 		pxor xmm3, xmm3
 		pxor xmm4, xmm4
@@ -1089,16 +1090,6 @@ monocromatizar_inf_asm:
 	jmp .caso_multiplo_1
 
 	.caso_multiplo_1:
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
 		ciclo
 		dec rax
 		cmp rax, 0

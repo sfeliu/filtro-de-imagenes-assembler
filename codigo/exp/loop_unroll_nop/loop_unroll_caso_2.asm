@@ -1043,6 +1043,7 @@ monocromatizar_inf_asm:
 
 
 	%macro ciclo 0
+		nopmacro
 		pxor xmm2, xmm2
 		pxor xmm3, xmm3
 		pxor xmm4, xmm4
@@ -1102,16 +1103,6 @@ monocromatizar_inf_asm:
 		jmp .fin
 
 	.caso_multiplo_2:
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
-		nopmacro
 		ciclo
 		ciclo
 		dec rax
