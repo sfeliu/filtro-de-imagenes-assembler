@@ -45,6 +45,7 @@ TC3XY = pd.read_csv('txt_result/TimeTempC3_XY.txt', delim_whitespace = True)
 ################################################################################
 #EXPERIMENTOS###################################################################
 
+x = [i for i in range(0, 20)]
 
 #BLIT###########################################################################
 
@@ -60,19 +61,40 @@ MaxABlitXY = BAXY.ix[:,2]
 MaxCBlitXY = BCXY.ix[:,2]
 MaxC3BlitXY = BC3XY.ix[:,2]
 
-plt.figure()
 ABlitXY = np.log(ABlitXY)
 CBlitXY = np.log(CBlitXY)
 C3BlitXY = np.log(C3BlitXY)
-plt.plot(ABlitXY, "c", label="Blit implementado en ASM")
-plt.plot(CBlitXY, "m", label="Blit implementado en C")
-plt.plot(C3BlitXY, "k", label="Blit implementado en C O3")
+
+MinABlitXY = np.log(MinABlitXY)
+MinCBlitXY = np.log(MinCBlitXY)
+MinC3BlitXY = np.log(MinC3BlitXY)
+
+MaxABlitXY = np.log(MaxABlitXY)
+MaxCBlitXY = np.log(MaxCBlitXY)
+MaxC3BlitXY = np.log(MaxC3BlitXY)
+
+MinABlitXY = ABlitXY - MinABlitXY
+MinCBlitXY = CBlitXY - MinCBlitXY
+MinC3BlitXY = C3BlitXY - MinC3BlitXY
+
+MaxABlitXY = MaxABlitXY - ABlitXY
+MaxCBlitXY = MaxCBlitXY - CBlitXY
+MaxC3BlitXY = MaxC3BlitXY - C3BlitXY
+
+plt.figure()
+plt.errorbar(x, ABlitXY, yerr=[MinABlitXY, MaxABlitXY], fmt='-o', label="Blit implementado en ASM")
+plt.errorbar(x, CBlitXY, yerr=[MinCBlitXY, MaxCBlitXY], fmt='-o', label="Blit implementado en C")
+plt.errorbar(x, C3BlitXY, yerr=[MinC3BlitXY, MaxC3BlitXY], fmt='-o', label="Blit implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.xticks([0, 3, 6, 9, 12, 15, 18],
-		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
+plt.xticks([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+		   [	'128x128', '140x140', '160x160', '180x180', '200x200',
+		   		'208x208', '220x220', '256x256', '300x300', '360X360',
+		   		'400x400', '420x420', '480x480', '512x512', '640x640',
+		   		'720x720', '800x800', '1024x1024', '2048x2048',
+		   		'4096X4096'], rotation=35)
 plt.legend()
-plt.savefig("ExpBlitXY.png")
+plt.savefig("ExpBlitXY.pdf", bbox_inches='tight')
 
 ################################################################################
 
@@ -90,19 +112,40 @@ MaxAEdgeXY = EAXY.ix[:,2]
 MaxCEdgeXY = ECXY.ix[:,2]
 MaxC3EdgeXY = EC3XY.ix[:,2]
 
-plt.figure()
 AEdgeXY = np.log(AEdgeXY)
 CEdgeXY = np.log(CEdgeXY)
 C3EdgeXY = np.log(C3EdgeXY)
-plt.plot(AEdgeXY, "c", label="Edge implementado en ASM")
-plt.plot(CEdgeXY, "m", label="Edge implementado en C")
-plt.plot(C3EdgeXY, "k", label="Edge implementado en C O3")
+
+MinAEdgeXY = np.log(MinAEdgeXY)
+MinCEdgeXY = np.log(MinCEdgeXY)
+MinC3EdgeXY = np.log(MinC3EdgeXY)
+
+MaxAEdgeXY = np.log(MaxAEdgeXY)
+MaxCEdgeXY = np.log(MaxCEdgeXY)
+MaxC3EdgeXY = np.log(MaxC3EdgeXY)
+
+MinAEdgeXY = AEdgeXY - MinAEdgeXY
+MinCEdgeXY = CEdgeXY - MinCEdgeXY
+MinC3EdgeXY = C3EdgeXY - MinC3EdgeXY
+
+MaxAEdgeXY = MaxAEdgeXY - AEdgeXY
+MaxCEdgeXY = MaxCEdgeXY - CEdgeXY
+MaxC3EdgeXY = MaxC3EdgeXY - C3EdgeXY
+
+plt.figure()
+plt.errorbar(x, AEdgeXY, yerr=[MinAEdgeXY, MaxAEdgeXY], fmt='-o', label="Edge implementado en ASM")
+plt.errorbar(x, CEdgeXY, yerr=[MinCEdgeXY, MaxCEdgeXY], fmt='-o', label="Edge implementado en C")
+plt.errorbar(x, C3EdgeXY, yerr=[MinC3EdgeXY, MaxC3EdgeXY], fmt='-o', label="Edge implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.xticks([0, 3, 6, 9, 12, 15, 18],
-		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
+plt.xticks([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+		   [	'128x128', '140x140', '160x160', '180x180', '200x200',
+		   		'208x208', '220x220', '256x256', '300x300', '360X360',
+		   		'400x400', '420x420', '480x480', '512x512', '640x640',
+		   		'720x720', '800x800', '1024x1024', '2048x2048',
+		   		'4096X4096'], rotation=35)
 plt.legend()
-plt.savefig("ExpEdgeXY.png")
+plt.savefig("ExpEdgeXY.pdf", bbox_inches='tight')
 
 ################################################################################
 
@@ -120,19 +163,40 @@ MaxAMonoXY = MAXY.ix[:,2]
 MaxCMonoXY = MCXY.ix[:,2]
 MaxC3MonoXY = MC3XY.ix[:,2]
 
-plt.figure()
 AMonoXY = np.log(AMonoXY)
 CMonoXY = np.log(CMonoXY)
 C3MonoXY = np.log(C3MonoXY)
-plt.plot(AMonoXY, "c", label="Monocromatizar implementado en ASM")
-plt.plot(CMonoXY, "m", label="Monocromatizar implementado en C")
-plt.plot(C3MonoXY, "k", label="Monocromatizar implementado en C O3")
+
+MinAMonoXY = np.log(MinAMonoXY)
+MinCMonoXY = np.log(MinCMonoXY)
+MinC3MonoXY = np.log(MinC3MonoXY)
+
+MaxAMonoXY = np.log(MaxAMonoXY)
+MaxCMonoXY = np.log(MaxCMonoXY)
+MaxC3MonoXY = np.log(MaxC3MonoXY)
+
+MinAMonoXY = AMonoXY - MinAMonoXY
+MinCMonoXY = CMonoXY - MinCMonoXY
+MinC3MonoXY = C3MonoXY - MinC3MonoXY
+
+MaxAMonoXY = MaxAMonoXY - AMonoXY
+MaxCMonoXY = MaxCMonoXY - CMonoXY
+MaxC3MonoXY = MaxC3MonoXY - C3MonoXY
+
+plt.figure()
+plt.errorbar(x, AMonoXY, yerr=[MinAMonoXY, MaxAMonoXY], fmt='-o', label="Monocromatizar implementado en ASM")
+plt.errorbar(x, CMonoXY, yerr=[MinCMonoXY, MaxCMonoXY], fmt='-o', label="Monocromatizar implementado en C")
+plt.errorbar(x, C3MonoXY, yerr=[MinC3MonoXY, MaxC3MonoXY], fmt='-o', label="Monocromatizar implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.xticks([0, 3, 6, 9, 12, 15, 18],
-		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
+plt.xticks([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+		   [	'128x128', '140x140', '160x160', '180x180', '200x200',
+		   		'208x208', '220x220', '256x256', '300x300', '360X360',
+		   		'400x400', '420x420', '480x480', '512x512', '640x640',
+		   		'720x720', '800x800', '1024x1024', '2048x2048',
+		   		'4096X4096'], rotation=35)
 plt.legend()
-plt.savefig("ExpMonoXY.png")
+plt.savefig("ExpMonoXY.pdf", bbox_inches='tight')
 
 ################################################################################
 
@@ -150,19 +214,40 @@ MaxAOndasXY = OAXY.ix[:,2]
 MaxCOndasXY = OCXY.ix[:,2]
 MaxC3OndasXY = OC3XY.ix[:,2]
 
-plt.figure()
 AOndasXY = np.log(AOndasXY)
 COndasXY = np.log(COndasXY)
 C3OndasXY = np.log(C3OndasXY)
-plt.plot(AOndasXY, "c", label="Ondas implementado en ASM")
-plt.plot(COndasXY, "m", label="Ondas implementado en C")
-plt.plot(C3OndasXY, "k", label="Ondas implementado en C O3")
+
+MinAOndasXY = np.log(MinAOndasXY)
+MinCOndasXY = np.log(MinCOndasXY)
+MinC3OndasXY = np.log(MinC3OndasXY)
+
+MaxAOndasXY = np.log(MaxAOndasXY)
+MaxCOndasXY = np.log(MaxCOndasXY)
+MaxC3OndasXY = np.log(MaxC3OndasXY)
+
+MinAOndasXY = AOndasXY - MinAOndasXY
+MinCOndasXY = COndasXY - MinCOndasXY
+MinC3OndasXY = C3OndasXY - MinC3OndasXY
+
+MaxAOndasXY = MaxAOndasXY - AOndasXY
+MaxCOndasXY = MaxCOndasXY - COndasXY
+MaxC3OndasXY = MaxC3OndasXY - C3OndasXY
+
+plt.figure()
+plt.errorbar(x, AOndasXY, yerr=[MinAOndasXY, MaxAOndasXY], fmt='-o', label="Ondas implementado en ASM")
+plt.errorbar(x, COndasXY, yerr=[MinCOndasXY, MaxCOndasXY], fmt='-o', label="Ondas implementado en C")
+plt.errorbar(x, C3OndasXY, yerr=[MinC3OndasXY, MaxC3OndasXY], fmt='-o', label="Ondas implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.xticks([0, 3, 6, 9, 12, 15, 18],
-		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
+plt.xticks([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+		   [	'128x128', '140x140', '160x160', '180x180', '200x200',
+		   		'208x208', '220x220', '256x256', '300x300', '360X360',
+		   		'400x400', '420x420', '480x480', '512x512', '640x640',
+		   		'720x720', '800x800', '1024x1024', '2048x2048',
+		   		'4096X4096'], rotation=35)
 plt.legend()
-plt.savefig("ExpOndasXY.png")
+plt.savefig("ExpOndasXY.pdf", bbox_inches='tight')
 
 ################################################################################
 
@@ -180,17 +265,38 @@ MaxATempXY = TAXY.ix[:,2]
 MaxCTempXY = TCXY.ix[:,2]
 MaxC3TempXY = TC3XY.ix[:,2]
 
-plt.figure()
 ATempXY = np.log(ATempXY)
 CTempXY = np.log(CTempXY)
 C3TempXY = np.log(C3TempXY)
-plt.plot(ATempXY, "c", label="Temperature implementado en ASM")
-plt.plot(CTempXY, "m", label="Temperature implementado en C")
-plt.plot(C3TempXY, "k", label="Temperature implementado en C O3")
+
+MinATempXY = np.log(MinATempXY)
+MinCTempXY = np.log(MinCTempXY)
+MinC3TempXY = np.log(MinC3TempXY)
+
+MaxATempXY = np.log(MaxATempXY)
+MaxCTempXY = np.log(MaxCTempXY)
+MaxC3TempXY = np.log(MaxC3TempXY)
+
+MinATempXY = ATempXY - MinATempXY
+MinCTempXY = CTempXY - MinCTempXY
+MinC3TempXY = C3TempXY - MinC3TempXY
+
+MaxATempXY = MaxATempXY - ATempXY
+MaxCTempXY = MaxCTempXY - CTempXY
+MaxC3TempXY = MaxC3TempXY - C3TempXY
+
+plt.figure()
+plt.errorbar(x, ATempXY, yerr=[MinATempXY, MaxATempXY], fmt='-o', label="Temperature implementado en ASM")
+plt.errorbar(x, CTempXY, yerr=[MinCTempXY, MaxCTempXY], fmt='-o', label="Temperature implementado en C")
+plt.errorbar(x, C3TempXY, yerr=[MinC3TempXY, MaxC3TempXY], fmt='-o', label="Temperature implementado en C O3")
 plt.xlabel("Tamaño de la imagen")
 plt.ylabel("Cantidad de ciclos de clock en escala logaritmica")
-plt.xticks([0, 3, 6, 9, 12, 15, 18],
-		   ['128x128', '180x180', '220x220', '360x360', '480x480', '720x720', '2048x2048'])
+plt.xticks([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+		   ['128x128', '140x140', '160x160', '180x180', '200x200',
+		   		'208x208', '220x220', '256x256', '300x300', '360X360',
+		   		'400x400', '420x420', '480x480', '512x512', '640x640',
+		   		'720x720', '800x800', '1024x1024', '2048x2048',
+		   		'4096X4096'], rotation=35)
 plt.legend()
-plt.savefig("ExpTempXY.png")
+plt.savefig("ExpTempXY.pdf", bbox_inches='tight')
 ################################################################################

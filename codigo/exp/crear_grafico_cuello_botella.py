@@ -15,22 +15,20 @@ TExtra = MCB.ix[:,0]
 TMemoria = MCB.ix[:,1]
 TProc = MCB.ix[:,2]
 
-Times = [int(TExtra), int(TMemoria), int(TProc)]
-Datos = ["Extras", "Memoria", "Procesamiento"]
-Colores = ['Blue', 'Orange', 'Green']
+Times = [int(TMemoria), int(TProc), int(TExtra)]
+Datos = ["Memoria", "Procesamiento", "Extras"]
 
 fig = plt.figure()
-plt.pie(Times, colors=Colores, labels=Datos, autopct='%1.1f%%')
+plt.pie(Times, labels=Datos, autopct='%1.1f%%')
 plt.axis('equal')
 plt.xlabel("Cantidad de ciclos de clock")
-plt.savefig("ExpCuelloBotella.png")
+plt.savefig("ExpCuelloBotella.pdf", bbox_inches='tight')
 
 Times = [int(TMemoria), int(TProc)]
 Datos = ["Memoria", "Procesamiento"]
-Colores = ['Orange', 'Green']
 
 fig = plt.figure()
-plt.pie(Times, colors=Colores, labels=Datos, autopct='%1.1f%%')
+plt.pie(Times, labels=Datos, autopct='%1.1f%%')
 plt.axis('equal')
 plt.xlabel("Cantidad de ciclos de clock")
-plt.savefig("ExpCuelloBotella2.png")
+plt.savefig("ExpCuelloBotella2.pdf", bbox_inches='tight')

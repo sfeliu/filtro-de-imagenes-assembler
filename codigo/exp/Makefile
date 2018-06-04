@@ -9,7 +9,7 @@ run :
 	python3 Ondas_tiempos.py
 	python3 Temp_tiempos.py
 	python3 Experimentos.py
-	mv *.png plot_result/
+	mv *.pdf plot_result/
 
 run2 :
 	python3 GenerarTamanos.py
@@ -91,7 +91,7 @@ run2 :
 	python3 mover_file.py False loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
 
 	python3 crear_grafico_loop_unroll.py
-	mv *.png plot_result/
+	mv *.pdf plot_result/
 
 	rm -fr ../filtros_backup
 	rm -fr *.bmp
@@ -103,7 +103,7 @@ run3 :
 	python3 mover_file.py False cuello_de_botella monocromatizar_inf_asm.asm monocromatizar_inf_asm.asm
 
 	python3 crear_grafico_cuello_botella.py
-	mv *.png plot_result/
+	mv *.pdf plot_result/
 
 	rm -fr ../filtros_backup
 	rm -fr *.bmp
@@ -188,7 +188,7 @@ run4 :
 	python3 mover_file.py False loop_unroll loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
 
 	python3 crear_grafico_loop_unroll_tamanos.py
-	mv *.png plot_result/
+	mv *.pdf plot_result/
 
 	rm -fr ../filtros_backup
 	rm -fr *.bmp
@@ -273,7 +273,7 @@ run5 :
 	python3 mover_file.py False loop_unroll_nop loop_unroll_caso_262144.asm monocromatizar_inf_asm.asm
 
 	python3 crear_grafico_loop_unroll_nop.py
-	mv *.png plot_result/
+	mv *.pdf plot_result/
 
 	rm -fr ../filtros_backup
 	rm -fr *.bmp
@@ -281,5 +281,5 @@ run5 :
 
 clean :
 	rm -fr txt_result/*.txt
-	rm -fr plot_result/*.png
+	rm -fr plot_result/*.pdf
 	rm -fr img/VarXY/*.bmp

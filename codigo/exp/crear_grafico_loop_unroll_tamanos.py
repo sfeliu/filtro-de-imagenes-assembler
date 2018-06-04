@@ -92,16 +92,6 @@ CMono4 = [int(CMono1[4]/1000), int(CMono2[4]/1000), int(CMono4[4]/1000), int(CMo
  			int(CMono4096[4]/1000), int(CMono8192[4]/1000), int(CMono16384[4]/1000), int(CMono32768[4]/1000), int(CMono65536[4]/1000),
  			 int(CMono131072[4]/1000), int(CMono262144[4]/1000)]
 
-fig = plt.figure()
-x = range(0, len(CMono0))
-plt.bar(x, CMono0)
-plt.xlabel("n*4 pixel procesados por ciclo")
-plt.ylabel("Cantidad de miles de ciclos de clock")
-plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
-		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
-		    '65536', '131072', '262144'], rotation=25)
-plt.savefig("ExpLoopUnroll.png")
-
 plt.figure()
 logMono0 = np.log(CMono0)
 logMono1 = np.log(CMono1)
@@ -117,6 +107,6 @@ plt.xlabel("n*4 pixel procesados por ciclo")
 plt.ylabel("Cantidad de miles de ciclos de clock")
 plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
 		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
-		    '65536', '131072', '262144'], rotation=25)
+		    '65536', '131072', '262144'], rotation=35)
 plt.legend()
-plt.savefig("ExpMuchasTA.png")
+plt.savefig("ExpMuchasTA.pdf", bbox_inches='tight')

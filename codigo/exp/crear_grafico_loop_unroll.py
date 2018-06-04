@@ -67,7 +67,7 @@ CMono65536 = MC65536.ix[:,0]
 CMono131072 = MC131072.ix[:,0]
 CMono262144 = MC262144.ix[:,0]
 
-CMono = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000), int(CMono16/1000), int(CMono32/1000),
+CMono0 = [int(CMono1/1000), int(CMono2/1000), int(CMono4/1000), int(CMono8/1000), int(CMono16/1000), int(CMono32/1000),
  			int(CMono64/1000), int(CMono128/1000), int(CMono256/1000), int(CMono512/1000), int(CMono1024/1000), int(CMono2048/1000),
  			int(CMono4096/1000), int(CMono8192/1000), int(CMono16384/1000), int(CMono32768/1000), int(CMono65536/1000),
  			 int(CMono131072/1000), int(CMono262144/1000)]
@@ -79,5 +79,5 @@ plt.xlabel("n*4 pixel procesados por ciclo")
 plt.ylabel("Cantidad de miles de ciclos de clock")
 plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
 		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
-		    '65536', '131072', '262144'], rotation=25)
-plt.savefig("ExpLoopUnroll.png")
+		    '65536', '131072', '262144'], rotation=35)
+plt.savefig("ExpLoopUnroll.pdf", bbox_inches='tight')
