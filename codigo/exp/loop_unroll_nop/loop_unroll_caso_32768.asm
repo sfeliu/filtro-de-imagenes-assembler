@@ -25,7 +25,7 @@ section .rodata
 
 section .text
 
-%macro nopmacros 0
+%macro nopmacro 0
 		NOP
 		NOP
 		NOP
@@ -1025,7 +1025,7 @@ section .text
 		NOP
 		NOP
 		NOP
-		NOP	
+		NOP
 		%endmacro
 
 monocromatizar_inf_asm:

@@ -79,5 +79,5 @@ plt.xlabel("n*4 pixel procesados por ciclo")
 plt.ylabel("Cantidad de miles de ciclos de clock")
 plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
 		   ['1', '2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048', '4096', '8192', '16384', '32768',
-		    '65536', '131072', '262144'], rotation=25)
-plt.savefig("ExpLoopUnroll.png")
+		    '65536', '131072', '262144'], rotation=35)
+plt.savefig("ExpLoopUnroll.pdf", bbox_inches='tight')
